@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALARYFES — Web + Redes para negocios locales</title>
+<meta name="description" content="ALARYFES: una web que convierte visitas en reservas y unas redes que no tienes que gestionar tú. Web + contenido + reportes, cada mes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 170'%3E%3Cpath d='M47.4 121.5 A58 58 0 1 1 152.6 121.5' fill='none' stroke='%23A81C1C' stroke-width='26' stroke-dasharray='21.5 7.5'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add("js");</script>
+<style>
+/* ============================================================
+   ALARYFES — alarifes digitales · estética andalusí contemporánea
+   ============================================================ */
+:root{
+  --crema:      #F7F0E4;
+  --crema-2:    #EFE4CE;
+  --ink:        #15211C;   /* verde-negro del wordmark */
+  --ink-soft:   #1C2B24;
+  --ink-dim:    rgba(21,33,28,.68);
+  --ink-faint:  rgba(21,33,28,.45);
+  --rojo:       #A81C1C;   /* carmín del arco */
+  --rojo-2:     #7E1212;
+  --rojo-vivo:  #C22525;
+  --arena:      #C9A46B;   /* columnas */
+  --arena-deep: #A5824C;
+  --crema-dim:  rgba(247,240,228,.72);
+  --crema-faint:rgba(247,240,228,.42);
+  --line-ink:   rgba(21,33,28,.16);
+  --line-arena: rgba(201,164,107,.28);
+
+  --font-display:"Fraunces", Georgia, serif;
+  --font-body:"Outfit", "Helvetica Neue", sans-serif;
+  --w: min(1160px, 92vw);
+  --ease: cubic-bezier(.22,.8,.3,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+
+  /* khatam tinta sobre crema */
+  --pat-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='104' viewBox='0 0 104 104'%3E%3Cg fill='none' stroke='%2315211C' stroke-opacity='.06'%3E%3Crect x='23' y='23' width='58' height='58'/%3E%3Crect x='23' y='23' width='58' height='58' transform='rotate(45 52 52)'/%3E%3Ccircle cx='52' cy='52' r='7'/%3E%3C/g%3E%3C/svg%3E");
+  /* khatam arena sobre oscuro */
+  --pat-arena: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='104' viewBox='0 0 104 104'%3E%3Cg fill='none' stroke='%23C9A46B' stroke-opacity='.12'%3E%3Crect x='23' y='23' width='58' height='58'/%3E%3Crect x='23' y='23' width='58' height='58' transform='rotate(45 52 52)'/%3E%3Ccircle cx='52' cy='52' r='7'/%3E%3C/g%3E%3C/svg%3E");
+  /* khatam crema sobre rojo */
+  --pat-crema: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='104' viewBox='0 0 104 104'%3E%3Cg fill='none' stroke='%23F7F0E4' stroke-opacity='.1'%3E%3Crect x='23' y='23' width='58' height='58'/%3E%3Crect x='23' y='23' width='58' height='58' transform='rotate(45 52 52)'/%3E%3Ccircle cx='52' cy='52' r='7'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--crema);
+  color:var(--ink);
+  font-weight:300;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:var(--w);margin-inline:auto;position:relative}
+::selection{background:var(--rojo);color:var(--crema)}
+h1,h2,h3{font-family:var(--font-display);font-weight:500;line-height:1.08;letter-spacing:-.01em}
+
+/* ---------- revelado on-scroll (solo se oculta si hay JS) ---------- */
+html.js .rv{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+html.js .rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
+html.js .rv-scale{transform:translateY(20px) scale(.96)}
+@media(prefers-reduced-motion:reduce){
+  .rv,.rv-scale{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important}
+  #cursor{display:none!important}
+}
+
+/* ---------- preloader ---------- */
+#loader{display:none}
+html.js #loader{
+  position:fixed;inset:0;z-index:200;background:var(--crema);
+  display:grid;place-items:center;
+  transition:transform .9s var(--ease),visibility .9s;
+}
+#loader.done{transform:translateY(-101%);visibility:hidden}
+#loader .mark{width:min(180px,40vw);animation:loaderMark 1.1s var(--ease-out)}
+#loader .word{
+  font-family:var(--font-display);font-weight:600;font-size:1.3rem;
+  letter-spacing:.5em;text-indent:.5em;margin-top:1.4rem;text-align:center;
+  animation:loaderWord 1.2s var(--ease-out);
+}
+@keyframes loaderMark{from{opacity:.4;transform:scale(.88) rotate(-5deg)}to{opacity:1;transform:none}}
+@keyframes loaderWord{from{opacity:0;letter-spacing:.9em}to{opacity:1;letter-spacing:.5em}}
+
+/* ---------- barra de progreso de scroll ---------- */
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0;z-index:120;
+  background:linear-gradient(90deg,var(--rojo),var(--rojo-vivo));
+}
+
+/* ---------- cursor ornamental ---------- */
+#cursor{
+  position:fixed;top:0;left:0;z-index:150;pointer-events:none;
+  width:34px;height:34px;margin:-17px 0 0 -17px;
+  transition:transform .25s var(--ease),opacity .3s;
+  opacity:0;will-change:transform;
+}
+#cursor svg{width:100%;height:100%;color:var(--rojo);animation:spin 9s linear infinite}
+#cursor.on{opacity:.85}
+#cursor.hot{transform:scale(2)}
+@keyframes spin{to{rotate:360deg}}
+@media(pointer:coarse){#cursor{display:none}}
+
+/* ---------- etiquetas ---------- */
+.eyebrow{
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--rojo);font-weight:600;
+}
+.eyebrow::before{content:"";width:36px;height:1px;background:var(--rojo);flex:none}
+.eyebrow.center{justify-content:center}
+.eyebrow.center::after{content:"";width:36px;height:1px;background:var(--rojo);flex:none}
+.dark-sec .eyebrow{color:var(--arena)}
+.dark-sec .eyebrow::before,.dark-sec .eyebrow.center::after{background:var(--arena)}
+
+.section-title{font-size:clamp(2rem,5vw,3.4rem);margin:.9rem 0 1.1rem}
+.section-sub{color:var(--ink-dim);max-width:56ch;font-size:1.06rem}
+.dark-sec .section-sub{color:var(--crema-dim)}
+.center{text-align:center}
+.center .section-sub{margin-inline:auto}
+
+/* numeral fantasma de sección */
+.sec-num{
+  position:absolute;top:-1.2rem;right:0;z-index:0;pointer-events:none;
+  font-family:var(--font-display);font-style:italic;font-weight:300;
+  font-size:clamp(5rem,14vw,10rem);line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(168,28,28,.22);
+}
+.dark-sec .sec-num{-webkit-text-stroke:1px rgba(201,164,107,.25)}
+
+/* ---------- botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  font-family:var(--font-body);font-weight:600;font-size:.95rem;
+  padding:1rem 2rem;border-radius:999px;border:1px solid transparent;
+  cursor:pointer;letter-spacing:.02em;position:relative;overflow:hidden;
+  transition:transform .35s var(--ease),background .3s,color .3s,border-color .3s,box-shadow .3s;
+  will-change:transform;
+}
+.btn::after{ /* barrido de brillo */
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.28) 50%,transparent 60%);
+  transform:translateX(-120%);transition:transform .7s var(--ease);
+}
+.btn:hover::after{transform:translateX(120%)}
+.btn-red{background:var(--rojo);color:var(--crema);box-shadow:0 14px 34px -14px rgba(168,28,28,.6)}
+.btn-red:hover{background:var(--rojo-vivo)}
+.btn-ink{border-color:var(--line-ink);color:var(--ink)}
+.btn-ink:hover{border-color:var(--rojo);color:var(--rojo)}
+.btn-crema{background:var(--crema);color:var(--rojo)}
+.btn-crema:hover{background:#fff}
+.btn-arena{background:var(--arena);color:var(--ink)}
+.btn-arena:hover{background:var(--arena-deep);color:var(--crema)}
+.btn-ghost-crema{border-color:rgba(247,240,228,.35);color:var(--crema)}
+.btn-ghost-crema:hover{border-color:var(--arena);color:var(--arena)}
+.btn-sm{padding:.65rem 1.4rem;font-size:.85rem}
+
+/* ============ HEADER ============ */
+header{
+  position:fixed;inset:0 0 auto;z-index:90;
+  transition:background .4s,border-color .4s,box-shadow .4s;
+  border-bottom:1px solid transparent;
+}
+header.scrolled{
+  background:rgba(247,240,228,.88);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--line-ink);
+}
+.header-in{
+  width:var(--w);margin-inline:auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 0;transition:padding .4s;
+}
+header.scrolled .header-in{padding:.6rem 0}
+.logo{display:flex;align-items:center;gap:.65rem}
+.logo svg{width:38px;height:34px;flex:none}
+.logo span{
+  font-family:var(--font-display);font-weight:600;font-size:1.12rem;
+  letter-spacing:.3em;text-indent:.3em;color:var(--ink);
+}
+nav.main-nav{display:none;gap:2.1rem}
+nav.main-nav a{
+  font-size:.83rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-dim);font-weight:500;position:relative;transition:color .3s;
+}
+nav.main-nav a::after{
+  content:"";position:absolute;left:0;bottom:-6px;height:1.5px;width:0;
+  background:var(--rojo);transition:width .35s var(--ease);
+}
+nav.main-nav a:hover{color:var(--rojo)}
+nav.main-nav a:hover::after{width:100%}
+@media(min-width:900px){nav.main-nav{display:flex}}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;align-items:center;
+  padding:8.5rem 0 5rem;isolation:isolate;overflow:hidden;
+}
+.hero-pattern{
+  position:absolute;inset:-30%;z-index:-3;
+  background-image:var(--pat-ink);background-size:104px 104px;
+  animation:drift 100s linear infinite;will-change:transform;
+}
+@keyframes drift{to{transform:translate(104px,104px)}}
+.hero-glow{
+  position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(60% 46% at 82% 24%, rgba(168,28,28,.09), transparent 60%),
+    radial-gradient(50% 40% at 8% 90%, rgba(201,164,107,.18), transparent 60%);
+}
+.hero-grid{display:grid;gap:3rem;align-items:center}
+@media(min-width:980px){.hero-grid{grid-template-columns:1.2fr .8fr}}
+
+.hero h1{
+  font-size:clamp(2.6rem,6.8vw,5rem);
+  font-weight:500;margin:1.5rem 0 1.7rem;color:var(--ink);
+}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--rojo)}
+/* revelado por líneas */
+.ln{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.ln-in{display:block}
+html.js .ln-in{transform:translateY(115%)}
+body.loaded .ln-in{animation:rise 1s var(--ease-out) forwards}
+.ln:nth-child(1) .ln-in{animation-delay:.05s}
+.ln:nth-child(2) .ln-in{animation-delay:.15s}
+.ln:nth-child(3) .ln-in{animation-delay:.25s}
+.ln:nth-child(4) .ln-in{animation-delay:.35s}
+@keyframes rise{to{transform:none}}
+html.js .hero .fade-up{opacity:0;transform:translateY(24px)}
+body.loaded .hero .fade-up{animation:fadeUp .9s var(--ease-out) forwards}
+body.loaded .hero .fu-1{animation-delay:.5s}
+body.loaded .hero .fu-2{animation-delay:.65s}
+body.loaded .hero .fu-3{animation-delay:.8s}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+.hero p.lead{
+  font-size:clamp(1.02rem,1.6vw,1.22rem);
+  color:var(--ink-dim);max-width:50ch;margin-bottom:2.4rem;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.6rem}
+.hero-tags span{
+  font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+  border:1px solid var(--line-ink);border-radius:999px;
+  padding:.42rem 1rem;color:var(--ink-faint);background:rgba(247,240,228,.5);
+}
+
+/* marca grande del hero */
+.hero-mark{position:relative;justify-self:center;display:none}
+@media(min-width:980px){.hero-mark{display:block}}
+.hero-mark .mark{width:min(380px,32vw);filter:drop-shadow(0 30px 50px rgba(168,28,28,.18));animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+.orbit-star{
+  position:absolute;color:var(--arena);opacity:.65;will-change:transform;
+}
+.orbit-star svg{width:100%;height:100%}
+.os-1{width:56px;height:56px;top:-8%;left:-14%}
+.os-2{width:34px;height:34px;bottom:4%;right:-10%}
+.os-3{width:22px;height:22px;top:32%;right:-18%;color:var(--rojo);opacity:.5}
+
+/* ============ MARQUESINA ============ */
+.marquee{
+  position:relative;z-index:5;overflow:hidden;
+  background:var(--rojo);color:var(--crema);
+  transform:rotate(-1.1deg) scale(1.03);
+  border-block:1px solid var(--rojo-2);
+  padding:.95rem 0;
+}
+.marquee.arena{background:var(--arena);color:var(--ink);border-color:var(--arena-deep);transform:rotate(1.1deg) scale(1.03)}
+.marquee-track{display:flex;gap:0;width:max-content;animation:marquee 26s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{
+  display:flex;align-items:center;gap:2.2rem;padding-right:2.2rem;
+  font-family:var(--font-display);font-size:1.15rem;white-space:nowrap;
+}
+.marquee-track em{font-style:italic;font-weight:400}
+.marquee-track svg{width:16px;height:16px;flex:none}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ============ SECCIONES ============ */
+section{position:relative;padding:6.5rem 0}
+@media(min-width:880px){section{padding:8.5rem 0}}
+.dark-sec{background:
+  var(--pat-arena),
+  radial-gradient(80% 60% at 85% 0%, rgba(168,28,28,.14), transparent 55%),
+  linear-gradient(170deg,var(--ink-soft),var(--ink) 60%);
+  background-size:104px 104px,cover,cover;
+  color:var(--crema);
+}
+
+/* borde polilobulado */
+.scallop{height:24px;position:relative;z-index:2}
+.scallop.into-dark{
+  background-image:radial-gradient(circle at 50% 100%, var(--ink-soft) 13px, transparent 13.5px);
+  background-size:46px 24px;background-position:center bottom;
+  margin-bottom:-1px;
+}
+.scallop.outof-dark{
+  background-image:radial-gradient(circle at 50% 0%, var(--ink) 13px, transparent 13.5px);
+  background-size:46px 24px;background-position:center top;
+  margin-top:-1px;
+}
+
+/* ============ PROBLEMA / SOLUCIÓN ============ */
+.ps-grid{display:grid;gap:1.4rem;margin-top:3.4rem}
+@media(min-width:880px){.ps-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+.ps-card{
+  position:relative;border:1px solid rgba(201,164,107,.2);
+  border-radius:26px;padding:2.5rem 2.1rem 2.3rem;
+  background:rgba(247,240,228,.03);
+  transition:transform .5s var(--ease),border-color .4s;
+  overflow:hidden;
+}
+.ps-card:hover{transform:translateY(-6px);border-color:rgba(201,164,107,.45)}
+.ps-card.solution{
+  background:var(--pat-crema),linear-gradient(160deg,var(--rojo),var(--rojo-2) 75%);
+  background-size:104px 104px,cover;
+  border-color:rgba(247,240,228,.25);
+}
+.ps-card .glyph{width:46px;height:46px;margin-bottom:1.4rem;color:var(--arena)}
+.ps-card.solution .glyph{color:var(--crema)}
+.ps-card h3{font-size:1.6rem;margin-bottom:1.2rem}
+.ps-card ul{list-style:none;display:grid;gap:.9rem;color:var(--crema-dim)}
+.ps-card.solution ul{color:rgba(247,240,228,.88)}
+.ps-card li{display:flex;gap:.8rem;align-items:flex-start}
+.ps-card li::before{
+  content:"";flex:none;width:9px;height:9px;margin-top:.5em;
+  background:var(--arena);
+  clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);
+}
+.ps-card.solution li::before{background:var(--crema)}
+.ps-bridge{
+  margin-top:3rem;text-align:center;
+  font-family:var(--font-display);font-style:italic;
+  font-size:clamp(1.2rem,2.6vw,1.7rem);color:var(--arena);
+}
+
+/* ============ PRICING ============ */
+.plans{display:grid;gap:1.8rem;margin-top:3.8rem;align-items:stretch}
+@media(min-width:980px){.plans{grid-template-columns:repeat(3,1fr);gap:1.5rem}}
+.plan{
+  position:relative;display:flex;flex-direction:column;
+  border:1px solid var(--line-ink);border-radius:26px;
+  background:#FDFAF3;
+  padding:2.6rem 2rem 2.2rem;
+  transition:transform .5s var(--ease),border-color .4s,box-shadow .5s;
+  will-change:transform;
+}
+.plan::before{ /* brillo diagonal al pasar */
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(115deg,transparent 42%,rgba(201,164,107,.14) 50%,transparent 58%);
+  background-size:250% 100%;background-position:0% 0;
+  transition:background-position .9s var(--ease);
+}
+.plan:hover::before{background-position:100% 0}
+.plan:hover{transform:translateY(-8px);border-color:var(--arena);box-shadow:0 30px 60px -30px rgba(21,33,28,.25)}
+.plan.featured{
+  border-color:var(--rojo-2);
+  background:var(--pat-crema),linear-gradient(170deg,var(--rojo) 0%,var(--rojo-2) 80%);
+  background-size:104px 104px,cover;
+  color:var(--crema);
+  box-shadow:0 36px 80px -32px rgba(126,18,18,.55);
+}
+@media(min-width:980px){
+  .plan.featured{transform:scale(1.05)}
+  .plan.featured:hover{transform:scale(1.05) translateY(-8px)}
+}
+.plan-badge{
+  position:absolute;top:-15px;left:50%;transform:translateX(-50%);
+  background:var(--arena);color:var(--ink);
+  font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  padding:.45rem 1.25rem;border-radius:999px;white-space:nowrap;z-index:2;
+}
+.plan-arch{width:52px;height:56px;margin-bottom:1.3rem;color:var(--rojo)}
+.plan.featured .plan-arch{color:var(--arena)}
+.plan .name{font-family:var(--font-display);font-size:1.65rem;font-weight:500}
+.plan .ideal{color:var(--ink-faint);font-size:.93rem;margin:.5rem 0 1.6rem;min-height:2.9em}
+.plan.featured .ideal{color:var(--crema-faint)}
+.plan .price{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.plan .price strong{
+  font-family:var(--font-display);font-size:clamp(2.6rem,3.4vw,3.1rem);
+  font-weight:600;letter-spacing:-.02em;
+}
+.plan .price span{color:var(--ink-dim);font-size:.95rem}
+.plan.featured .price span{color:var(--crema-dim)}
+.plan .setup{color:var(--rojo);font-size:.9rem;font-weight:500;letter-spacing:.04em;margin:.35rem 0 1.8rem}
+.plan.featured .setup{color:var(--arena)}
+.plan hr{border:none;border-top:1px solid var(--line-ink);margin-bottom:1.6rem}
+.plan.featured hr{border-top-color:rgba(247,240,228,.22)}
+.plan ul{list-style:none;display:grid;gap:.72rem;font-size:.94rem;color:var(--ink-dim);margin-bottom:1.8rem}
+.plan.featured ul{color:rgba(247,240,228,.9)}
+.plan li{display:flex;gap:.7rem;align-items:flex-start;line-height:1.45}
+.plan li svg{flex:none;width:15px;height:15px;margin-top:.28em;color:var(--rojo)}
+.plan.featured li svg{color:var(--arena)}
+.plan .not ul{gap:.55rem}
+.plan .not li{color:var(--ink-faint)}
+.plan.featured .not li{color:var(--crema-faint)}
+.plan .not li svg{color:rgba(168,28,28,.55)}
+.plan.featured .not li svg{color:rgba(247,240,228,.45)}
+.plan .not h4{
+  font-family:var(--font-body);font-weight:600;font-size:.74rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);
+  margin-bottom:.8rem;
+}
+.plan.featured .not h4{color:var(--crema-faint)}
+.plan .cta-row{margin-top:auto;padding-top:1.8rem;position:relative;z-index:2}
+.plan .cta-row .btn{width:100%}
+
+/* ============ OFERTA ============ */
+.launch{padding:0}
+.launch-panel{
+  position:relative;overflow:hidden;
+  background:
+    var(--pat-arena),
+    radial-gradient(90% 120% at 85% 0%, rgba(168,28,28,.35), transparent 55%),
+    linear-gradient(160deg,#221510,var(--ink) 70%);
+  background-size:104px 104px,cover,cover;
+  color:var(--crema);
+  padding:6rem 0 6.5rem;
+}
+.launch-grid{display:grid;gap:2.8rem;align-items:center}
+@media(min-width:980px){.launch-grid{grid-template-columns:1.1fr .9fr;gap:4rem}}
+.launch-tag{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(168,28,28,.25);border:1px solid rgba(194,37,37,.6);
+  color:#EDB9B9;border-radius:999px;
+  padding:.55rem 1.25rem;font-size:.78rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.4rem;
+}
+.launch-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--rojo-vivo);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.launch h2{font-size:clamp(2rem,4.6vw,3.1rem)}
+.launch-price{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin:1.6rem 0 .3rem}
+.launch-price strong{font-family:var(--font-display);font-size:clamp(3rem,5.4vw,4rem);font-weight:600;color:var(--crema)}
+.launch-price span{color:var(--crema-dim)}
+.launch .setup{color:var(--arena);margin-bottom:1.6rem;font-size:.96rem}
+.launch p.body{color:var(--crema-dim);max-width:48ch}
+.launch p.note{color:var(--crema-faint);font-size:.92rem;margin-top:1.6rem}
+.launch-list{
+  list-style:none;display:grid;gap:.95rem;
+  border:1px solid var(--line-arena);border-radius:22px;
+  background:rgba(247,240,228,.045);padding:2rem 1.8rem;
+  backdrop-filter:blur(4px);
+}
+.launch-list li{display:flex;gap:.85rem;align-items:flex-start;color:var(--crema);font-size:.98rem}
+.launch-list li svg{flex:none;width:16px;height:16px;margin-top:.3em;color:var(--arena)}
+.launch .btn{margin-top:1.4rem}
+.launch-count{
+  display:flex;gap:.55rem;margin-top:2rem;align-items:center;
+}
+.launch-count i{
+  width:30px;height:30px;flex:none;font-style:normal;
+  display:grid;place-items:center;
+  border:1px solid var(--line-arena);border-radius:8px;
+  color:var(--arena);font-size:.8rem;font-weight:600;
+}
+.launch-count span{font-size:.82rem;color:var(--crema-faint);margin-left:.5rem}
+
+/* ============ COMPLEMENTOS ============ */
+.addons{background:var(--pat-ink),var(--crema);background-size:104px 104px,cover}
+.addon-grid{display:grid;gap:1rem;margin-top:3.4rem}
+@media(min-width:640px){.addon-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:980px){.addon-grid{grid-template-columns:repeat(3,1fr);gap:1.15rem}}
+.addon{
+  display:flex;align-items:center;gap:1rem;
+  background:#FDFAF3;border:1px solid var(--line-ink);
+  border-radius:18px;padding:1.3rem 1.4rem;
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.addon:hover{transform:translateY(-4px);border-color:var(--rojo);box-shadow:0 18px 40px -22px rgba(168,28,28,.35)}
+.addon .star{flex:none;width:20px;height:20px;color:var(--rojo);transition:rotate .5s var(--ease)}
+.addon:hover .star{rotate:45deg}
+.addon .t{font-weight:500;font-size:.97rem;line-height:1.35}
+.addon .p{margin-left:auto;flex:none;font-family:var(--font-display);font-weight:600;color:var(--rojo);font-size:1.02rem;white-space:nowrap}
+
+/* ============ PROCESO ============ */
+.steps{display:grid;gap:1.7rem;margin-top:3.8rem}
+@media(min-width:880px){.steps{grid-template-columns:repeat(3,1fr);gap:1.8rem}}
+.step{
+  position:relative;border:1px solid rgba(201,164,107,.22);
+  border-radius:140px 140px 24px 24px;   /* arco de herradura */
+  padding:3.4rem 1.9rem 2.5rem;text-align:center;
+  background:rgba(247,240,228,.035);
+  transition:transform .5s var(--ease),border-color .4s,background .4s;
+}
+.step:hover{transform:translateY(-8px);border-color:var(--arena);background:rgba(247,240,228,.06)}
+.step .num{
+  width:60px;height:60px;margin:0 auto 1.6rem;position:relative;
+  display:grid;place-items:center;
+  font-family:var(--font-display);font-size:1.4rem;font-weight:600;color:var(--arena);
+}
+.step .num svg{position:absolute;inset:0;color:var(--arena);transition:rotate .8s var(--ease)}
+.step:hover .num svg{rotate:45deg}
+.step h3{font-size:1.36rem;margin-bottom:.8rem}
+.step p{color:var(--crema-dim);font-size:.96rem}
+.steps-note{
+  text-align:center;margin-top:3rem;color:var(--arena);
+  font-family:var(--font-display);font-style:italic;font-size:clamp(1.1rem,2.2vw,1.4rem);
+}
+
+/* ============ REFERIDOS ============ */
+.referral{padding:0}
+.referral-panel{
+  background:var(--pat-crema),linear-gradient(150deg,var(--rojo),var(--rojo-2) 80%);
+  background-size:104px 104px,cover;
+  color:var(--crema);padding:5.5rem 0;
+  border-block:1px solid var(--rojo-2);
+}
+.referral-in{display:grid;gap:2rem;align-items:center;text-align:center;justify-items:center}
+@media(min-width:880px){.referral-in{grid-template-columns:1fr auto;text-align:left;justify-items:start}}
+.referral .eyebrow{color:var(--crema)}
+.referral .eyebrow::before{background:var(--crema)}
+.referral h2{font-size:clamp(1.8rem,3.8vw,2.7rem);margin:.8rem 0}
+.referral p{color:rgba(247,240,228,.85);max-width:52ch}
+
+/* ============ CONTACTO ============ */
+.contact-grid{display:grid;gap:3rem;margin-top:3.6rem}
+@media(min-width:980px){.contact-grid{grid-template-columns:.9fr 1.1fr;gap:4.5rem}}
+.contact-info{display:grid;gap:1.6rem;align-content:start}
+.contact-line{display:flex;align-items:center;gap:1rem;color:var(--ink-dim);font-size:1.02rem}
+.contact-line svg{flex:none;width:20px;height:20px;color:var(--rojo)}
+.contact-line a{transition:color .3s}
+.contact-line a:hover{color:var(--rojo)}
+.contact-info .mini{
+  font-size:.86rem;color:var(--ink-faint);
+  border-left:2px solid var(--rojo);padding-left:1rem;margin-top:.6rem;
+}
+form{display:grid;gap:1.15rem}
+.field{display:grid;gap:.45rem}
+.field label{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.field input,.field textarea,.field select{
+  font-family:var(--font-body);font-size:1rem;color:var(--ink);font-weight:400;
+  background:#FDFAF3;border:1px solid var(--line-ink);border-radius:14px;
+  padding:1rem 1.15rem;transition:border-color .3s,box-shadow .3s;width:100%;
+}
+.field textarea{resize:vertical;min-height:120px}
+.field :is(input,textarea,select):focus{outline:none;border-color:var(--rojo);box-shadow:0 0 0 3px rgba(168,28,28,.12)}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A81C1C' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.1rem center}
+form .btn{justify-self:start;margin-top:.4rem}
+.form-note{font-size:.82rem;color:var(--ink-faint)}
+
+/* ============ FOOTER ============ */
+footer{
+  background:var(--pat-arena),linear-gradient(180deg,var(--ink),#0C1512);
+  background-size:104px 104px,cover;
+  color:var(--crema);
+  padding:4rem 0 8rem;
+}
+.footer-in{display:grid;gap:2rem}
+@media(min-width:880px){.footer-in{grid-template-columns:auto 1fr;align-items:start;gap:4.5rem}}
+footer .logo span{color:var(--crema);font-size:1rem}
+footer p{font-size:.83rem;color:var(--crema-faint);max-width:74ch}
+footer p+p{margin-top:.5rem}
+
+/* ============ WHATSAPP FLOTANTE ============ */
+.wa-float{
+  position:fixed;right:1.2rem;bottom:1.2rem;z-index:95;
+  width:58px;height:58px;border-radius:50%;
+  background:#1FA855;display:grid;place-items:center;
+  box-shadow:0 14px 36px -8px rgba(0,0,0,.45);
+  transition:transform .3s var(--ease);
+}
+.wa-float::before{
+  content:"";position:absolute;inset:-5px;border-radius:50%;
+  border:1.5px solid rgba(31,168,85,.55);
+  animation:waPulse 2.4s ease-out infinite;
+}
+@keyframes waPulse{0%{transform:scale(.85);opacity:1}70%,100%{transform:scale(1.25);opacity:0}}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+</style>
+</head>
+<body>
+
+<!-- símbolo: la marca ALARYFES (arco de dovelas + granada + columnas) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="alaryfes-mark">
+      <!-- arco de herradura con dovelas (9 dovelas exactas: 9·21.2 + 8·5.25 ≈ longitud del arco) -->
+      <path d="M47.4 121.5 A58 58 0 1 1 152.6 121.5" fill="none" stroke="var(--mk-rojo,#A81C1C)" stroke-width="26" stroke-dasharray="21.2 5.25"/>
+      <!-- corona de granada -->
+      <path d="M66.2 33.4 Q 58 20 60 6 Q 72 14 82 12 Q 94 8 100 -8 Q 106 8 118 12 Q 128 14 140 6 Q 142 20 133.8 33.4 A 72 72 0 0 0 66.2 33.4 Z" fill="var(--mk-rojo,#A81C1C)"/>
+      <!-- columnas -->
+      <path d="M40 132 L 68 132 L 62 141 L 62 166 L 48 166 L 48 141 Z" fill="var(--mk-arena,#C9A46B)"/>
+      <path d="M160 132 L 132 132 L 138 141 L 138 166 L 152 166 L 152 141 Z" fill="var(--mk-arena,#C9A46B)"/>
+    </g>
+    <g id="khatam-o">
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <rect x="4" y="4" width="12" height="12"/>
+        <rect x="4" y="4" width="12" height="12" transform="rotate(45 10 10)"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<!-- ================= PRELOADER ================= -->
+<div id="loader" aria-hidden="true">
+  <div>
+    <svg class="mark" viewBox="0 -14 200 184"><use href="#alaryfes-mark"/></svg>
+    <div class="word">ALARYFES</div>
+  </div>
+</div>
+
+<div id="progress" aria-hidden="true"></div>
+<div id="cursor" aria-hidden="true"><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg></div>
+
+<!-- ================= HEADER ================= -->
+<header id="top">
+  <div class="header-in">
+    <a class="logo" href="#top" aria-label="ALARYFES — inicio">
+      <svg viewBox="0 -14 200 184" aria-hidden="true"><use href="#alaryfes-mark"/></svg>
+      <span>ALARYFES</span>
+    </a>
+    <nav class="main-nav" aria-label="Principal">
+      <a href="#planes">Planes</a>
+      <a href="#oferta">Oferta</a>
+      <a href="#complementos">Complementos</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn btn-ink btn-sm magnetic" href="#contacto">Hablemos</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div class="hero-pattern" aria-hidden="true" data-para="0.1"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow fade-up fu-1">Alarifes digitales · Web · Redes · Cada mes</p>
+      <h1>
+        <span class="ln"><span class="ln-in">Una web que convierte</span></span>
+        <span class="ln"><span class="ln-in">visitas en <em>reservas</em>.</span></span>
+        <span class="ln"><span class="ln-in">Y unas redes que</span></span>
+        <span class="ln"><span class="ln-in">no gestionas <em>tú</em>.</span></span>
+      </h1>
+      <p class="lead fade-up fu-2">Diseñamos tu web y llevamos tus redes sociales todos los meses: publicaciones, reels, reseñas y reportes de resultados. Tú te dedicas a tu negocio; nosotros, a que te encuentren y te elijan.</p>
+      <div class="hero-ctas fade-up fu-3">
+        <a class="btn btn-red magnetic" href="#contacto">Hablemos de tu negocio</a>
+        <a class="btn btn-ink magnetic" href="#planes">Ver planes</a>
+      </div>
+      <div class="hero-tags fade-up fu-3">
+        <span>Barberías</span><span>Centros de estética</span><span>Clínicas premium</span><span>Negocios locales</span>
+      </div>
+    </div>
+    <div class="hero-mark fade-up fu-2" aria-hidden="true">
+      <svg class="mark" viewBox="0 -14 200 184" data-para="-0.06"><use href="#alaryfes-mark"/></svg>
+      <div class="orbit-star os-1 spin-scroll"><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg></div>
+      <div class="orbit-star os-2 spin-scroll"><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg></div>
+      <div class="orbit-star os-3 spin-scroll"><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MARQUESINA ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span><em>Web que convierte</em><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg>Redes sin gestionarlas tú<svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg><em>Reportes cada mes</em><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg>Reservas por WhatsApp<svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg></span>
+    <span><em>Web que convierte</em><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg>Redes sin gestionarlas tú<svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg><em>Reportes cada mes</em><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg>Reservas por WhatsApp<svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg></span>
+  </div>
+</div>
+
+<!-- ================= PROBLEMA / SOLUCIÓN ================= -->
+<div class="scallop into-dark" aria-hidden="true"></div>
+<section id="problema" class="dark-sec">
+  <div class="wrap">
+    <span class="sec-num" aria-hidden="true">01</span>
+    <p class="eyebrow rv">El problema real</p>
+    <h2 class="section-title rv">Tu negocio funciona.<br>Tu presencia online, no tanto.</h2>
+    <p class="section-sub rv">La mayoría de barberías, centros de estética y clínicas no tienen un problema de calidad: tienen un problema de visibilidad. Y gestionarla bien es un trabajo a jornada completa.</p>
+
+    <div class="ps-grid">
+      <div class="ps-card problem rv">
+        <svg class="glyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="22" cy="22" r="17"/><path d="M22 13v10l7 5"/></svg>
+        <h3>Lo que pasa cada semana</h3>
+        <ul>
+          <li>No hay tiempo para publicar, contestar reseñas ni actualizar la web.</li>
+          <li>La web (si existe) no convierte: no hay botón de reserva claro ni WhatsApp directo.</li>
+          <li>Las redes se llevan "cuando se puede": semanas sin publicar, luego tres posts de golpe.</li>
+          <li>La competencia con peor servicio aparece antes en Google e Instagram.</li>
+        </ul>
+      </div>
+      <div class="ps-card solution rv rv-d1">
+        <svg class="glyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="26" height="26"/><rect x="9" y="9" width="26" height="26" transform="rotate(45 22 22)"/><circle cx="22" cy="22" r="4"/></svg>
+        <h3>Cómo lo resolvemos</h3>
+        <ul>
+          <li>Una web pensada para una sola cosa: que la visita acabe en reserva o WhatsApp.</li>
+          <li>Contenido mensual constante: publicaciones, stories y reels grabados por nosotros.</li>
+          <li>Reseñas, SEO local y ficha de Google trabajadas cada mes.</li>
+          <li>Un reporte claro con resultados: qué se ha publicado y qué ha traído.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="ps-bridge rv">No es una web puntual. Es una relación mensual: web + contenido + resultados.</p>
+  </div>
+</section>
+<div class="scallop outof-dark" aria-hidden="true"></div>
+
+<!-- ================= PLANES ================= -->
+<section id="planes">
+  <div class="wrap">
+    <span class="sec-num" aria-hidden="true">02</span>
+    <div class="center">
+      <p class="eyebrow center rv">Planes mensuales</p>
+      <h2 class="section-title rv">Elige el ritmo de tu negocio</h2>
+      <p class="section-sub rv">Todos los planes incluyen hosting, dominio y base de datos mientras el servicio esté activo. Sin letra pequeña.</p>
+    </div>
+
+    <div class="plans">
+      <!-- STARTER -->
+      <article class="plan rv">
+        <svg class="plan-arch" viewBox="0 0 52 56" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 56 V26 A5 5 0 0 1 5 19 A21 21 0 0 1 47 19 A5 5 0 0 1 44 26 V56"/></svg>
+        <h3 class="name">Pack Starter</h3>
+        <p class="ideal">Para barberías y negocios pequeños que arrancan online.</p>
+        <div class="price"><strong>250€</strong><span>/mes</span></div>
+        <p class="setup">+ 490€ alta única</p>
+        <hr>
+        <ul>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Web profesional de 1 página, adaptada a móvil</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Botón de WhatsApp directo</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Reservas vía app externa</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Hosting, dominio y BBDD incluidos</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>8 publicaciones al mes</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>4 stories al mes</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>1 reporte mensual</li>
+        </ul>
+        <div class="not">
+          <h4>No incluye</h4>
+          <ul>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Sesión de fotos profesional</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Campañas de pago</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Branding completo desde cero</li>
+          </ul>
+        </div>
+        <div class="cta-row"><a class="btn btn-ink" href="#contacto">Empezar con Starter</a></div>
+      </article>
+
+      <!-- PRO (destacado) -->
+      <article class="plan featured rv rv-d1">
+        <span class="plan-badge">El más elegido</span>
+        <svg class="plan-arch" viewBox="0 0 52 56" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 56 V26 A5 5 0 0 1 5 19 A21 21 0 0 1 47 19 A5 5 0 0 1 44 26 V56"/><path d="M14 56 V28 A4 4 0 0 1 11.5 22 A15.5 15.5 0 0 1 40.5 22 A4 4 0 0 1 38 28 V56" stroke-opacity=".45" stroke-width="1.2"/></svg>
+        <h3 class="name">Pack Pro</h3>
+        <p class="ideal">Para centros de estética y negocios en crecimiento.</p>
+        <div class="price"><strong>450€</strong><span>/mes</span></div>
+        <p class="setup">+ 790€ alta única</p>
+        <hr>
+        <ul>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Web de hasta 4 páginas</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>WhatsApp + reservas desde la web</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>12 publicaciones + 8 stories al mes</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>2 reels al mes, grabados y editados por nosotros</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Gestión básica de comunidad</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>SEO local + gestión de reseñas de Google</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Chatbot básico</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Hosting, dominio y BBDD incluidos</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>1 reporte mensual</li>
+        </ul>
+        <div class="not">
+          <h4>No incluye</h4>
+          <ul>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Inversión en publicidad</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Producción de foto/vídeo aparte</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Gestión de crisis compleja</li>
+          </ul>
+        </div>
+        <div class="cta-row"><a class="btn btn-crema" href="#contacto">Quiero el Pack Pro</a></div>
+      </article>
+
+      <!-- PREMIUM -->
+      <article class="plan rv rv-d2">
+        <svg class="plan-arch" viewBox="0 0 52 56" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 56 V26 A5 5 0 0 1 5 19 A21 21 0 0 1 47 19 A5 5 0 0 1 44 26 V56"/><g transform="translate(26 22)" stroke-width="1.1"><rect x="-6" y="-6" width="12" height="12"/><rect x="-6" y="-6" width="12" height="12" transform="rotate(45)"/></g></svg>
+        <h3 class="name">Pack Premium</h3>
+        <p class="ideal">Para clínicas de cirugía estética y centros premium.</p>
+        <div class="price"><strong>999€</strong><span>/mes</span></div>
+        <p class="setup">+ 1.499€ alta única</p>
+        <hr>
+        <ul>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Web de hasta 6 páginas con servicios por categoría</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>WhatsApp + reservas</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>16 publicaciones + 12 stories + 4 reels al mes (grabación y edición incluidas)</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Campaña de captación</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Gestión de comunidad y SEO local</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Ficha de Google optimizada mensualmente</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Chatbot premium</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>CRM de clientes y seguimientos</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Sistema de referidos</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Elección de 2 complementos</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Hosting, dominio y BBDD incluidos</li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Reporte cada 15 días + reunión mensual</li>
+        </ul>
+        <div class="not">
+          <h4>No incluye</h4>
+          <ul>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Inversión en publicidad</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Producción audiovisual avanzada</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Gestión multi-sede</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>Garantía de ventas concretas</li>
+          </ul>
+        </div>
+        <div class="cta-row"><a class="btn btn-ink" href="#contacto">Hablar sobre Premium</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OFERTA DE LANZAMIENTO ================= -->
+<div class="scallop into-dark" style="--ink-soft:#221510" aria-hidden="true"></div>
+<section class="launch" id="oferta">
+  <div class="launch-panel">
+    <div class="wrap launch-grid">
+      <div>
+        <span class="launch-tag rv"><span class="dot"></span>Solo 5 primeros negocios</span>
+        <h2 class="rv">Oferta de lanzamiento</h2>
+        <div class="launch-price rv rv-d1"><strong>250€</strong><span>/mes</span></div>
+        <p class="setup rv rv-d1">+ 390€ de alta · permanencia mínima 6 meses</p>
+        <p class="body rv rv-d2">Estamos arrancando y queremos nuestros cinco primeros casos de éxito. A cambio de un precio de entrada, nos autorizas a usar tu proyecto como caso de estudio y testimonio si quedas satisfecho.</p>
+        <a class="btn btn-red magnetic rv rv-d2" href="#contacto">Quiero una de las 5 plazas</a>
+        <div class="launch-count rv rv-d3" aria-label="5 plazas disponibles">
+          <i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><span>plazas · se retira al cerrar la quinta</span>
+        </div>
+      </div>
+      <ul class="launch-list rv rv-d1">
+        <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Web de 1 página con botón de reservas y WhatsApp</li>
+        <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Optimización inicial de tu Instagram</li>
+        <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>1 mes de contenido: 8 publicaciones + 4 stories</li>
+        <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Reporte inicial de situación y resultados</li>
+        <li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-4.8 3.6L13 16 8 12.2 3 16l1.8-6.4L0 6h6z"/></svg>Hosting, dominio y BBDD incluidos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<div class="scallop outof-dark" aria-hidden="true"></div>
+
+<!-- ================= COMPLEMENTOS ================= -->
+<section class="addons" id="complementos">
+  <div class="wrap">
+    <span class="sec-num" aria-hidden="true">03</span>
+    <div class="center">
+      <p class="eyebrow center rv">A tu medida</p>
+      <h2 class="section-title rv">Complementos</h2>
+      <p class="section-sub rv">Amplía tu plan cuando lo necesites. Se añaden y se quitan mes a mes, sin dramas.</p>
+    </div>
+    <div class="addon-grid">
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Sesión de fotos profesional</span><span class="p">desde 250€</span></div>
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Pack de reels en bloque</span><span class="p">desde 300€</span></div>
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Landing para campañas</span><span class="p">desde 150€</span></div>
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Página adicional</span><span class="p">90€/pág.</span></div>
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Tienda online</span><span class="p">desde 500€</span></div>
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Gestión de Meta / Google Ads</span><span class="p">150€/mes</span></div>
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Email marketing</span><span class="p">80€/mes</span></div>
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Blog SEO</span><span class="p">100€/mes</span></div>
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Gestión de reseñas</span><span class="p">60€/mes</span></div>
+      <div class="addon rv"><svg class="star" viewBox="0 0 20 20"><use href="#khatam-o"/></svg><span class="t">Segunda red social</span><span class="p">100€/mes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MARQUESINA 2 ================= -->
+<div class="marquee arena" aria-hidden="true">
+  <div class="marquee-track">
+    <span><em>Tú, a tu negocio</em><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg>Nosotros, a que te encuentren<svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg><em>Sin letra pequeña</em><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg>Comunicación directa<svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg></span>
+    <span><em>Tú, a tu negocio</em><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg>Nosotros, a que te encuentren<svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg><em>Sin letra pequeña</em><svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg>Comunicación directa<svg viewBox="0 0 20 20"><use href="#khatam-o"/></svg></span>
+  </div>
+</div>
+
+<!-- ================= CÓMO TRABAJAMOS ================= -->
+<div class="scallop into-dark" aria-hidden="true"></div>
+<section id="proceso" class="dark-sec">
+  <div class="wrap">
+    <span class="sec-num" aria-hidden="true">04</span>
+    <div class="center">
+      <p class="eyebrow center rv">El proceso</p>
+      <h2 class="section-title rv">Cómo trabajamos</h2>
+      <p class="section-sub rv">Tres pasos. Comunicación directa, sin letra pequeña.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv">
+        <div class="num"><svg viewBox="0 0 58 58" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="12" y="12" width="34" height="34"/><rect x="12" y="12" width="34" height="34" transform="rotate(45 29 29)"/></svg>1</div>
+        <h3>Hablamos</h3>
+        <p>Nos cuentas tu negocio y lo que necesitas. Te proponemos el plan que encaja, sin venderte lo que no te hace falta.</p>
+      </div>
+      <div class="step rv rv-d1">
+        <div class="num"><svg viewBox="0 0 58 58" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="12" y="12" width="34" height="34"/><rect x="12" y="12" width="34" height="34" transform="rotate(45 29 29)"/></svg>2</div>
+        <h3>Montamos</h3>
+        <p>Creamos tu web y preparamos el primer mes de contenido. Lo apruebas todo antes de que se publique nada.</p>
+      </div>
+      <div class="step rv rv-d2">
+        <div class="num"><svg viewBox="0 0 58 58" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="12" y="12" width="34" height="34"/><rect x="12" y="12" width="34" height="34" transform="rotate(45 29 29)"/></svg>3</div>
+        <h3>Publicamos y medimos</h3>
+        <p>Cada mes publicamos, optimizamos y te enviamos tu reporte. Tú ves los resultados; nosotros seguimos afinando.</p>
+      </div>
+    </div>
+    <p class="steps-note rv">Como los alarifes que levantaron al-Ándalus: oficio, geometría y obra bien hecha.</p>
+  </div>
+</section>
+<div class="scallop outof-dark" aria-hidden="true"></div>
+
+<!-- ================= REFERIDOS ================= -->
+<section class="referral">
+  <div class="referral-panel">
+    <div class="wrap referral-in">
+      <div>
+        <p class="eyebrow rv">Recomienda y gana</p>
+        <h2 class="rv">Un mes gratis por cada negocio que nos recomiendes</h2>
+        <p class="rv rv-d1">Por cada negocio recomendado que contrate cualquiera de nuestros planes, te descontamos un mes entero. Sin límite: tres recomendaciones, tres meses gratis.</p>
+      </div>
+      <a class="btn btn-crema magnetic rv rv-d2" href="#contacto">Recomendar un negocio</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section id="contacto">
+  <div class="wrap">
+    <span class="sec-num" aria-hidden="true">05</span>
+    <p class="eyebrow rv">Último paso</p>
+    <h2 class="section-title rv">Hablemos de tu negocio</h2>
+    <p class="section-sub rv">Cuéntanos qué tienes y qué te gustaría conseguir. Te respondemos en menos de 24 horas laborables, sin compromiso.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info rv">
+        <div class="contact-line">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h14v12H3z"/><path d="M3 5l7 6 7-6"/></svg>
+          <a href="mailto:[EMAIL]">[EMAIL]</a>
+        </div>
+        <div class="contact-line">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 3h4l1.5 4L7 9a12 12 0 0 0 4 4l2-2.5 4 1.5v4a1.5 1.5 0 0 1-1.6 1.5C8.6 17 3 11.4 2.5 4.6A1.5 1.5 0 0 1 4 3z"/></svg>
+          <a href="tel:[TELÉFONO]">[TELÉFONO]</a>
+        </div>
+        <div class="contact-line">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="14" height="14" rx="4"/><circle cx="10" cy="10" r="3.4"/><circle cx="14.4" cy="5.6" r=".8" fill="currentColor" stroke="none"/></svg>
+          <a href="https://instagram.com/" target="_blank" rel="noopener">[INSTAGRAM]</a>
+        </div>
+        <div class="contact-line">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2a8 8 0 0 0-6.9 12L2 18l4.2-1A8 8 0 1 0 10 2z"/></svg>
+          <a id="wa-link" href="#" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+        </div>
+        <p class="mini">Si prefieres el formulario, al enviarlo se abrirá WhatsApp con tu mensaje ya redactado. Rápido para ti, rápido para nosotros.</p>
+      </div>
+
+      <form class="rv rv-d1" id="contact-form">
+        <div class="field">
+          <label for="f-name">Tu nombre</label>
+          <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Nombre y apellido">
+        </div>
+        <div class="field">
+          <label for="f-biz">Tu negocio</label>
+          <input id="f-biz" name="business" type="text" required placeholder="Ej.: Barbería Albaicín, Granada">
+        </div>
+        <div class="field">
+          <label for="f-plan">Plan que te interesa</label>
+          <select id="f-plan" name="plan">
+            <option>Aún no lo sé</option>
+            <option>Oferta de lanzamiento</option>
+            <option>Pack Starter</option>
+            <option>Pack Pro</option>
+            <option>Pack Premium</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-msg">Cuéntanos brevemente</label>
+          <textarea id="f-msg" name="message" placeholder="Qué tienes ahora (web, Instagram…) y qué te gustaría conseguir"></textarea>
+        </div>
+        <button class="btn btn-red magnetic" type="submit">Enviar por WhatsApp</button>
+        <p class="form-note">Sin compromiso. Sin permanencia hasta que firmemos un plan.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap footer-in">
+    <a class="logo" href="#top" aria-label="ALARYFES — subir">
+      <svg viewBox="0 -14 200 184" aria-hidden="true" style="--mk-rojo:#C22525"><use href="#alaryfes-mark"/></svg>
+      <span>ALARYFES</span>
+    </a>
+    <div>
+      <p>© 2026 ALARYFES · Web y redes sociales para negocios locales.</p>
+      <p>Precios sin IVA (+21%). Permanencia mínima de 3 meses (6 meses en la oferta de lanzamiento). Hosting, dominio y base de datos incluidos mientras el servicio esté activo. Los complementos se facturan según tarifa vigente en el momento de la contratación.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= WHATSAPP FLOTANTE ================= -->
+<a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.5c1.2.6 2.5.9 3.8.9 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22.6c-1.2 0-2.4-.3-3.5-.8l-.6-.3-4.9.9 1-4.7-.3-.6a9.6 9.6 0 0 1-1.4-5.1c0-5.3 4.4-9.7 9.7-9.7s9.7 4.4 9.7 9.7-4.4 9.6-9.7 9.6zm5.3-7.2c-.3-.2-1.7-.9-2-1s-.5-.2-.7.1-.8 1-.9 1.2-.3.2-.6.1a7.9 7.9 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.4c.2.2 2.3 3.6 5.7 5 2.1.9 2.9 1 3.9.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.5z"/></svg>
+</a>
+
+<script>
+/* ── CONFIGURACIÓN ─────────────────────────────────────────
+   Rellena aquí tu número de WhatsApp con prefijo, sin espacios
+   ni símbolos. Ej.: "34600111222". Se aplica al botón flotante,
+   al enlace de contacto y al envío del formulario.            */
+const WHATSAPP_NUMBER = "[TELÉFONO]";
+/* ─────────────────────────────────────────────────────────── */
+
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const waBase = "https://wa.me/" + encodeURIComponent(WHATSAPP_NUMBER.replace(/[^\d]/g, "") || WHATSAPP_NUMBER);
+const waHello = "?text=" + encodeURIComponent("Hola, me gustaría hablar sobre la web y redes de mi negocio.");
+document.getElementById("wa-float").href = waBase + waHello;
+document.getElementById("wa-link").href = waBase + waHello;
+
+document.getElementById("contact-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const msg =
+    "Hola, soy " + f.name.value +
+    ", de " + f.business.value + ".\n" +
+    "Plan que me interesa: " + f.plan.value + ".\n" +
+    (f.message.value ? "Sobre mi negocio: " + f.message.value : "");
+  window.open(waBase + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+});
+
+/* ── Preloader ── */
+const loader = document.getElementById("loader");
+const startSite = () => {
+  loader.classList.add("done");
+  document.body.classList.add("loaded");
+};
+if (reduceMotion) startSite();
+else {
+  const minWait = new Promise((r) => setTimeout(r, 1000));
+  const winLoad = new Promise((r) => (document.readyState === "complete" ? r() : addEventListener("load", r)));
+  Promise.all([minWait, winLoad]).then(startSite);
+  setTimeout(startSite, 3200); // red de seguridad
+}
+
+/* ── Header + barra de progreso + parallax + estrellas giratorias ── */
+const header = document.querySelector("header");
+const progress = document.getElementById("progress");
+const paraEls = [...document.querySelectorAll("[data-para]")];
+const spinEls = [...document.querySelectorAll(".spin-scroll")];
+let ticking = false;
+function onScroll() {
+  header.classList.toggle("scrolled", scrollY > 40);
+  const max = document.documentElement.scrollHeight - innerHeight;
+  progress.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
+  if (!reduceMotion) {
+    for (const el of paraEls) el.style.translate = "0 " + scrollY * parseFloat(el.dataset.para) + "px";
+    for (const el of spinEls) el.style.rotate = scrollY * 0.06 + "deg";
+  }
+  ticking = false;
+}
+addEventListener("scroll", () => {
+  if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+}, { passive: true });
+onScroll();
+
+/* ── Revelado on-scroll ── */
+const io = new IntersectionObserver((entries) => {
+  for (const en of entries) if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+}, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+document.querySelectorAll(".rv").forEach((el) => io.observe(el));
+
+/* ── Botones magnéticos ── */
+if (!reduceMotion && matchMedia("(pointer: fine)").matches) {
+  document.querySelectorAll(".magnetic").forEach((btn) => {
+    btn.addEventListener("mousemove", (e) => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) / r.width;
+      const y = (e.clientY - r.top - r.height / 2) / r.height;
+      btn.style.transform = `translate(${x * 10}px, ${y * 8}px)`;
+    });
+    btn.addEventListener("mouseleave", () => { btn.style.transform = ""; });
+  });
+
+  /* ── Cursor ornamental (estrella que sigue al puntero) ── */
+  const cursor = document.getElementById("cursor");
+  let cx = -100, cy = -100, tx = -100, ty = -100, seen = false;
+  addEventListener("mousemove", (e) => {
+    tx = e.clientX; ty = e.clientY;
+    if (!seen) { seen = true; cx = tx; cy = ty; cursor.classList.add("on"); }
+    const hot = e.target.closest("a, button, .addon, .plan");
+    cursor.classList.toggle("hot", !!hot);
+  }, { passive: true });
+  (function follow() {
+    cx += (tx - cx) * 0.16; cy += (ty - cy) * 0.16;
+    cursor.style.left = cx + "px"; cursor.style.top = cy + "px";
+    requestAnimationFrame(follow);
+  })();
+  document.documentElement.addEventListener("mouseleave", () => cursor.classList.remove("on"));
+  document.documentElement.addEventListener("mouseenter", () => seen && cursor.classList.add("on"));
+}
+</script>
+</body>
+</html>

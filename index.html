@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALARYFES — Volvemos pronto</title>
+<meta name="description" content="Estamos rehaciendo la web. Volvemos pronto.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B100E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%2296%2038%20208%20244%22%3E%3Cdefs%3E%3CclipPath%20id%3D%22c%22%3E%3Crect%20x%3D%2280%22%20y%3D%2220%22%20width%3D%22240%22%20height%3D%22200%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cpath%20fill%3D%22%23C7302A%22%20d%3D%22M200%2044.5L216%2086L232%2068L240.2%20122A87.75%2087.75%200%200%200%20159.8%20122L168%2068L184%2086Z%22%2F%3E%3Cg%20clip-path%3D%22url%28%23c%29%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%23C7302A%22%20stroke-width%3D%2212%22%20d%3D%22M110.36%20225.7A93.25%2093.25%200%201%201%20289.64%20225.7%22%2F%3E%3Cg%20fill%3D%22%23C7302A%22%3E%3Cpath%20d%3D%22M136.43%20239.8A75%2075%200%200%201%20126.04%20212.44L158.09%20207.05A42.5%2042.5%200%200%200%20163.98%20222.55Z%22%2F%3E%3Cpath%20d%3D%22M125.22%20205.69A75%2075%200%200%201%20128.73%20176.64L159.61%20186.76A42.5%2042.5%200%200%200%20157.62%20203.22Z%22%2F%3E%3Cpath%20d%3D%22M131.14%20170.27A75%2075%200%200%201%20147.76%20146.19L170.4%20169.51A42.5%2042.5%200%200%200%20160.98%20183.16Z%22%2F%3E%3Cpath%20d%3D%22M152.85%20141.67A75%2075%200%200%201%20178.76%20128.07L187.96%20159.24A42.5%2042.5%200%200%200%20173.28%20166.95Z%22%2F%3E%3Cpath%20d%3D%22M185.37%20126.44A75%2075%200%200%201%20214.63%20126.44L208.29%20158.32A42.5%2042.5%200%200%200%20191.71%20158.32Z%22%2F%3E%3Cpath%20d%3D%22M221.24%20128.07A75%2075%200%200%201%20247.15%20141.67L226.72%20166.95A42.5%2042.5%200%200%200%20212.04%20159.24Z%22%2F%3E%3Cpath%20d%3D%22M252.24%20146.19A75%2075%200%200%201%20268.86%20170.27L239.02%20183.16A42.5%2042.5%200%200%200%20229.6%20169.51Z%22%2F%3E%3Cpath%20d%3D%22M271.27%20176.64A75%2075%200%200%201%20274.78%20205.69L242.38%20203.22A42.5%2042.5%200%200%200%20240.39%20186.76Z%22%2F%3E%3Cpath%20d%3D%22M273.96%20212.44A75%2075%200%200%201%20263.57%20239.8L236.02%20222.55A42.5%2042.5%200%200%200%20241.91%20207.05Z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23C9A46B%22%3E%3Cpath%20d%3D%22M127.72%20220H162.5%20C162.5%20229%20157.46%20227%20157.46%20236V266C157.46%20272%20159.56%20273.5%20159.56%20276H130.66C130.66%20273.5%20132.76%20272%20132.76%20266V236C132.76%20227%20127.72%20229%20127.72%20220Z%22%2F%3E%3Cpath%20d%3D%22M272.28%20220H237.5%20C237.5%20229%20242.54%20227%20242.54%20236V266C242.54%20272%20240.44%20273.5%20240.44%20276H269.34C269.34%20273.5%20267.24%20272%20267.24%20266V236C267.24%20227%20272.28%20229%20272.28%20220Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+<style>
+/* ============================================================
+   ALARYFES — en obras
+   ============================================================ */
+@property --k{syntax:"<number>";inherits:false;initial-value:0}
+
+:root{
+  --noche:      #0B100E;
+  --crema:      #F7F0E4;
+  --crema-dim:  rgba(247,240,228,.72);
+  --crema-faint:rgba(247,240,228,.38);
+  --rojo:       #C7302A;
+  --arena:      #C9A46B;
+  --font-display:"Fraunces", Georgia, serif;
+  --font-body:"Outfit", "Helvetica Neue", sans-serif;
+  --ease: cubic-bezier(.16,1,.3,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:var(--font-body);font-weight:300;line-height:1.6;
+  color:var(--crema);background:var(--noche);
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;display:flex;flex-direction:column;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ---------- fondo ---------- */
+.fondo{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+
+/* celosía de sebka, en oro muy tenue */
+.celosia{
+  position:absolute;inset:-12%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'%3E%3Cg fill='none' stroke='%23C9A46B' stroke-width='1.1'%3E%3Cpath d='M64 2 126 64 64 126 2 64Z'/%3E%3Cpath d='M64 24 104 64 64 104 24 64Z'/%3E%3Cpath d='M0 64h2M126 64h2M64 0v2M64 126v2'/%3E%3Ccircle cx='64' cy='64' r='7'/%3E%3C/g%3E%3C/svg%3E");
+  opacity:.17;
+  mask-image:radial-gradient(70% 60% at 50% 42%, #000 0%, transparent 78%);
+  -webkit-mask-image:radial-gradient(70% 60% at 50% 42%, #000 0%, transparent 78%);
+  animation:deriva 70s linear infinite;
+}
+@keyframes deriva{to{transform:translate3d(-128px,-128px,0)}}
+
+/* auroras cálidas que respiran */
+.aurora{position:absolute;border-radius:50%;filter:blur(80px);will-change:transform}
+.a1{width:74vmax;height:74vmax;left:-18vmax;top:-30vmax;background:radial-gradient(circle,rgba(201,164,107,.22),transparent 64%);animation:flotar1 28s ease-in-out infinite}
+.a2{width:60vmax;height:60vmax;right:-18vmax;bottom:-26vmax;background:radial-gradient(circle,rgba(199,48,42,.22),transparent 64%);animation:flotar2 34s ease-in-out infinite}
+.a3{width:46vmax;height:46vmax;left:50%;top:2%;margin-left:-23vmax;background:radial-gradient(circle,rgba(247,240,228,.07),transparent 60%);animation:flotar3 23s ease-in-out infinite}
+@keyframes flotar1{50%{transform:translate3d(8vmax,6vmax,0) scale(1.12)}}
+@keyframes flotar2{50%{transform:translate3d(-7vmax,-6vmax,0) scale(1.14)}}
+@keyframes flotar3{50%{transform:translate3d(0,4vmax,0) scale(1.1)}}
+
+/* candil: halo que sigue al puntero */
+.candil{
+  position:absolute;width:56vmax;height:56vmax;left:0;top:0;margin:-28vmax 0 0 -28vmax;
+  background:radial-gradient(circle,rgba(201,164,107,.18),rgba(199,48,42,.05) 40%,transparent 66%);
+  transform:translate3d(50vw,42vh,0);
+  opacity:0;transition:opacity 1s var(--ease);
+}
+body.vivo .candil{opacity:1}
+
+/* viñeta + grano */
+.vineta{position:absolute;inset:0;background:radial-gradient(130% 100% at 50% 38%,transparent 40%,rgba(4,6,5,.72) 100%)}
+.grano{
+  position:absolute;inset:0;opacity:.2;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* motas de polvo */
+.mota{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--arena);opacity:0;animation:subir linear infinite}
+@keyframes subir{
+  0%{transform:translateY(12vh) scale(.5);opacity:0}
+  15%{opacity:.6}
+  85%{opacity:.35}
+  100%{transform:translateY(-98vh) scale(1);opacity:0}
+}
+
+/* ---------- contenido ---------- */
+main{
+  position:relative;z-index:1;flex:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:clamp(24px,4.5vh,52px) 24px 16px;
+}
+.entra{opacity:0;transform:translateY(18px);animation:asomar 1.2s var(--ease) forwards}
+@keyframes asomar{to{opacity:1;transform:none}}
+
+/* ---------- la marca ---------- */
+.marca{
+  width:clamp(146px,19vw,200px);margin:0 auto;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  will-change:transform;
+}
+.marca svg{width:100%;height:auto;overflow:visible}
+.marca .aro{fill:none;stroke:var(--rojo);stroke-width:12}
+.marca .dovela,.marca .corona{fill:var(--rojo)}
+.marca .columna{fill:var(--arena)}
+
+/* montaje pieza a pieza */
+.pieza{
+  opacity:0;transform-origin:200px 200px;transform-box:view-box;
+  animation:colocar 1s var(--ease) var(--d,0s) forwards;
+}
+@keyframes colocar{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+
+/* reacción al puntero (la mueve el rAF vía --k) */
+.dovela,.corona,.aro,.columna{
+  transform-origin:200px 200px;transform-box:view-box;
+  transform:scale(calc(1 + var(--k)*.05));
+  filter:brightness(calc(1 + var(--k)*.6)) saturate(calc(1 + var(--k)*.35));
+}
+.aro{stroke-dasharray:100;stroke-dashoffset:100;animation:trazar 1.6s var(--ease) 1s forwards}
+@keyframes trazar{to{stroke-dashoffset:0}}
+
+.aliento{animation:respirar 6.5s ease-in-out 2.6s infinite}
+@keyframes respirar{50%{transform:translateY(-3.5px)}}
+
+/* ---------- palabra ---------- */
+.wordmark{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(1.9rem,5.4vw,2.9rem);
+  letter-spacing:.3em;text-indent:.3em;line-height:1.1;
+  margin-top:clamp(18px,3.2vh,30px);
+  background:linear-gradient(96deg,var(--crema) 20%,var(--arena) 46%,var(--crema) 72%);
+  background-size:230% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:brillo 10s ease-in-out 2s infinite;
+}
+@keyframes brillo{0%,100%{background-position:125% 0}50%{background-position:-25% 0}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;margin-top:15px;
+  font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--crema-faint);
+}
+.eyebrow i{width:5px;height:5px;border-radius:50%;background:var(--rojo);box-shadow:0 0 0 0 rgba(199,48,42,.5);animation:latido 2.8s ease-out infinite}
+@keyframes latido{
+  0%{box-shadow:0 0 0 0 rgba(199,48,42,.45)}
+  70%{box-shadow:0 0 0 9px rgba(199,48,42,0)}
+  100%{box-shadow:0 0 0 0 rgba(199,48,42,0)}
+}
+
+/* ---------- mensaje ---------- */
+h1{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(1.7rem,4.4vw,2.5rem);
+  line-height:1.2;letter-spacing:-.01em;
+  margin-top:clamp(26px,4.2vh,42px);
+}
+h1 em{font-style:italic;color:var(--arena)}
+p.lead{
+  margin:15px auto 0;max-width:38ch;
+  font-size:clamp(.94rem,1.9vw,1.02rem);
+  color:var(--crema-dim);font-weight:200;
+}
+
+/* ---------- contacto, discreto ---------- */
+.acciones{margin-top:clamp(22px,3.4vh,32px);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;align-items:center}
+.enlace{position:relative;font-size:.92rem;padding-bottom:3px;transition:color .4s var(--ease)}
+.enlace::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--arena);
+  transform:scaleX(0);transform-origin:right;transition:transform .55s var(--ease);
+}
+.enlace:hover{color:var(--arena)}
+.enlace:hover::after,.enlace:focus-visible::after{transform:scaleX(1);transform-origin:left}
+.sep{color:var(--crema-faint);font-size:.8rem}
+
+footer{
+  position:relative;z-index:1;padding:0 24px 24px;text-align:center;
+  font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(247,240,228,.26);
+}
+:focus-visible{outline:1px solid var(--arena);outline-offset:5px;border-radius:2px}
+
+@media (max-width:420px){
+  .wordmark{letter-spacing:.2em;text-indent:.2em}
+  .eyebrow{letter-spacing:.26em;font-size:.62rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .entra,.pieza{opacity:1;transform:none}
+  .aro{stroke-dashoffset:0}
+  .candil{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="fondo" aria-hidden="true">
+  <div class="aurora a1"></div>
+  <div class="aurora a2"></div>
+  <div class="aurora a3"></div>
+  <div class="celosia"></div>
+  <div class="candil" id="candil"></div>
+  <div id="polvo"></div>
+  <div class="vineta"></div>
+  <div class="grano"></div>
+</div>
+
+<main>
+
+  <div class="marca entra" id="marca" style="animation-delay:.1s">
+    <svg viewBox="96 38 208 244" role="img" aria-label="ALARYFES">
+      <title>ALARYFES</title>
+
+      <defs><clipPath id="imposta"><rect x="80" y="20" width="240" height="200"/></clipPath></defs>
+
+      <g class="pieza" style="--d:.05s"><path class="columna" d="M127.72 220H162.5 C162.5 229 157.46 227 157.46 236V266C157.46 272 159.56 273.5 159.56 276H130.66C130.66 273.5 132.76 272 132.76 266V236C132.76 227 127.72 229 127.72 220Z"/></g>
+      <g class="pieza" style="--d:.05s"><path class="columna" d="M272.28 220H237.5 C237.5 229 242.54 227 242.54 236V266C242.54 272 240.44 273.5 240.44 276H269.34C269.34 273.5 267.24 272 267.24 266V236C267.24 227 272.28 229 272.28 220Z"/></g>
+
+      <!-- el arco se corta plano en la linea de imposta -->
+      <g clip-path="url(#imposta)">
+        <g class="pieza" style="--d:0.30s"><path class="dovela" d="M136.43 239.8A75 75 0 0 1 126.04 212.44L158.09 207.05A42.5 42.5 0 0 0 163.98 222.55Z"/></g>
+        <g class="pieza" style="--d:0.40s"><path class="dovela" d="M125.22 205.69A75 75 0 0 1 128.73 176.64L159.61 186.76A42.5 42.5 0 0 0 157.62 203.22Z"/></g>
+        <g class="pieza" style="--d:0.50s"><path class="dovela" d="M131.14 170.27A75 75 0 0 1 147.76 146.19L170.4 169.51A42.5 42.5 0 0 0 160.98 183.16Z"/></g>
+        <g class="pieza" style="--d:0.60s"><path class="dovela" d="M152.85 141.67A75 75 0 0 1 178.76 128.07L187.96 159.24A42.5 42.5 0 0 0 173.28 166.95Z"/></g>
+        <g class="pieza" style="--d:0.70s"><path class="dovela" d="M185.37 126.44A75 75 0 0 1 214.63 126.44L208.29 158.32A42.5 42.5 0 0 0 191.71 158.32Z"/></g>
+        <g class="pieza" style="--d:0.60s"><path class="dovela" d="M221.24 128.07A75 75 0 0 1 247.15 141.67L226.72 166.95A42.5 42.5 0 0 0 212.04 159.24Z"/></g>
+        <g class="pieza" style="--d:0.50s"><path class="dovela" d="M252.24 146.19A75 75 0 0 1 268.86 170.27L239.02 183.16A42.5 42.5 0 0 0 229.6 169.51Z"/></g>
+        <g class="pieza" style="--d:0.40s"><path class="dovela" d="M271.27 176.64A75 75 0 0 1 274.78 205.69L242.38 203.22A42.5 42.5 0 0 0 240.39 186.76Z"/></g>
+        <g class="pieza" style="--d:0.30s"><path class="dovela" d="M273.96 212.44A75 75 0 0 1 263.57 239.8L236.02 222.55A42.5 42.5 0 0 0 241.91 207.05Z"/></g>
+
+        <path class="aro" pathLength="100" d="M110.36 225.7A93.25 93.25 0 1 1 289.64 225.7"/>
+      </g>
+
+      <g class="pieza" style="--d:1.5s"><g class="aliento"><path class="corona" d="M200 44.5L216 86L232 68L240.2 122A87.75 87.75 0 0 0 159.8 122L168 68L184 86Z"/></g></g>
+    </svg>
+  </div>
+
+  <div class="entra" style="animation-delay:1.6s">
+    <div class="wordmark">ALARYFES</div>
+    <div class="eyebrow"><i></i>En obras</div>
+  </div>
+
+  <div class="entra" style="animation-delay:1.85s">
+    <h1>Volvemos <em>pronto</em>.</h1>
+    <p class="lead">Estamos rehaciendo la web con calma, dovela a dovela. Mientras tanto seguimos al otro lado.</p>
+  </div>
+
+  <div class="acciones entra" style="animation-delay:2.05s">
+    <a class="enlace" href="mailto:[EMAIL]">Escríbenos</a>
+    <span class="sep">·</span>
+    <a class="enlace" href="tel:[TELÉFONO]">Llámanos</a>
+  </div>
+
+</main>
+
+<footer class="entra" style="animation-delay:2.3s">ALARYFES · Alarifes digitales</footer>
+
+<script>
+(() => {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  /* --- polvo en suspensión --- */
+  const polvo = document.getElementById("polvo");
+  for (let i = 0; i < 20; i++) {
+    const m = document.createElement("span");
+    m.className = "mota";
+    m.style.left = Math.random() * 100 + "%";
+    m.style.bottom = "-3vh";
+    m.style.animationDuration = 18 + Math.random() * 22 + "s";
+    m.style.animationDelay = -Math.random() * 34 + "s";
+    if (Math.random() > .72) m.style.width = m.style.height = "3px";
+    polvo.appendChild(m);
+  }
+
+  const candil = document.getElementById("candil");
+  const marca  = document.getElementById("marca");
+  const svg    = marca.querySelector("svg");
+  const piezas = [...svg.querySelectorAll(".dovela, .corona, .columna")];
+
+  /* ángulo de cada pieza respecto al centro del arco (200,200 en unidades svg) */
+  const angulo = piezas.map(p => {
+    const b = p.getBBox();
+    return Math.atan2(200 - (b.y + b.height / 2), (b.x + b.width / 2) - 200);
+  });
+
+  const TAU = Math.PI * 2;
+  const dist = (a, b) => { const d = Math.abs(a - b) % TAU; return d > Math.PI ? TAU - d : d; };
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  let px = innerWidth / 2, py = innerHeight * .4;
+  let sx = px, sy = py;
+  let sobre = false, ultimoMov = -1e9;
+  let onda = 0, ondaAng = Math.PI / 2;
+
+  addEventListener("pointermove", e => {
+    px = e.clientX; py = e.clientY;
+    ultimoMov = performance.now();
+    document.body.classList.add("vivo");
+  }, { passive: true });
+
+  marca.addEventListener("pointerenter", () => sobre = true);
+  marca.addEventListener("pointerleave", () => sobre = false);
+
+  function centroArco() {
+    const r = svg.getBoundingClientRect();
+    return [r.left + r.width * (200 - 96) / 208, r.top + r.height * (200 - 38) / 244];
+  }
+
+  /* al tocar el arco, una onda recorre las dovelas desde donde tocaste */
+  marca.addEventListener("pointerdown", e => {
+    const [cx, cy] = centroArco();
+    ondaAng = Math.atan2(cy - e.clientY, e.clientX - cx);
+    onda = 1;
+  });
+
+  function cuadro(t) {
+    sx = lerp(sx, px, .07);
+    sy = lerp(sy, py, .07);
+    candil.style.transform = `translate3d(${sx}px, ${sy}px, 0)`;
+
+    const r = svg.getBoundingClientRect();
+    const cx = r.left + r.width * (200 - 96) / 208;
+    const cy = r.top  + r.height * (200 - 38) / 244;
+
+    /* paralaje: la marca se aparta un poco del puntero */
+    const dx = (sx - (r.left + r.width / 2)) / innerWidth;
+    const dy = (sy - (r.top + r.height / 2)) / innerHeight;
+    marca.style.transform = `translate3d(${dx * -13}px, ${dy * -9}px, 0)`;
+
+    /* si nadie mueve el ratón, una luz recorre el arco sola */
+    const ocioso = t - ultimoMov > 2600;
+    const foco   = ocioso
+      ? Math.PI / 2 + Math.sin(t / 2800) * (Math.PI / 2.05)
+      : Math.atan2(cy - sy, sx - cx);
+
+    const sigma  = sobre ? .32 : .46;
+    const fuerza = sobre ? 1 : (ocioso ? .5 : .3);
+
+    if (onda > 0) { onda *= .955; if (onda < .015) onda = 0; }
+
+    for (let i = 0; i < piezas.length; i++) {
+      const d = dist(angulo[i], foco);
+      let k = Math.exp(-(d * d) / (2 * sigma * sigma)) * fuerza;
+      if (onda) {
+        const frente = (1 - onda) * 2.6;                 // radio angular de la onda
+        const dd = dist(angulo[i], ondaAng) - frente;
+        k = Math.max(k, onda * Math.exp(-(dd * dd) / .1));
+      }
+      piezas[i].style.setProperty("--k", k.toFixed(3));
+    }
+    requestAnimationFrame(cuadro);
+  }
+  requestAnimationFrame(cuadro);
+})();
+</script>
+</body>
+</html>
