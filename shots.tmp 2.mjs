@@ -1,0 +1,10 @@
+import { chromium } from "@playwright/test";
+const b = await chromium.launch({ channel: "chrome", headless: true });
+const p = await b.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 2 });
+await p.goto("http://127.0.0.1:3001/planes");
+await p.waitForTimeout(2500);
+await p.locator(".plan-art").nth(0).screenshot({ path: process.argv[2] + "/s1.png" });
+await p.locator(".plan-art").nth(1).screenshot({ path: process.argv[2] + "/s2.png" });
+await p.locator(".plan-art").nth(2).screenshot({ path: process.argv[2] + "/s3.png" });
+await p.locator(".plan-art").nth(3).screenshot({ path: process.argv[2] + "/s4.png" });
+await b.close();
