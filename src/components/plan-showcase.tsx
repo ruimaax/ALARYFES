@@ -16,6 +16,9 @@ export function PlanShowcase({
   const [date, setDate] = useState(initialDate);
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    // La fecha se comprueba en el navegador: en una web estática es lo que
+    // hace que el cambio de tarifas del 1 de enero ocurra solo.
+    setDate(new Date().toISOString());
     const timer = setInterval(() => setDate(new Date().toISOString()), 60000);
     const observer = new IntersectionObserver(
       (entries) => {
@@ -108,6 +111,7 @@ function PlanColumn({
             {euros(term === 3 ? prices.alta3 : prices.alta12)}
           </span>
         </p>
+        <span className="plan-price-rule" aria-hidden="true" />
         <p className="plan-setup">
           {sitio.planes.luego},{" "}
           <strong>

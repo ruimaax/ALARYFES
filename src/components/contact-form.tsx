@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { privacidadBasica } from "@/data/legal";
 import { sitio } from "@/data/sitio";
@@ -14,6 +14,14 @@ export function ContactForm({
   referral?: boolean;
   selectedPlan?: string;
 }) {
+  // El plan llega por ?plan= en la URL. Se lee en el navegador para que la
+  // página pueda servirse estática.
+  const [plan, setPlan] = useState(selectedPlan);
+  useEffect(() => {
+    if (selectedPlan) return;
+    const enUrl = new URLSearchParams(location.search).get("plan");
+    if (enUrl && planes.some((p) => p.slug === enUrl)) setPlan(enUrl);
+  }, [selectedPlan]);
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "pending" | "error"
   >("idle");
@@ -152,7 +160,8 @@ export function ContactForm({
               <select
                 name="plan"
                 id={`${prefix}-plan`}
-                defaultValue={selectedPlan}
+                value={plan}
+                onChange={(e) => setPlan(e.target.value)}
               >
                 <option value="">{sitio.contacto.sinPlan}</option>
                 {planes.map((p) => (

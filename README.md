@@ -78,6 +78,46 @@ Hay validación compartida en cliente y servidor, consentimiento sin premarcar, 
 
 No hay artículos, testimonios ni casos ficticios publicados. Para publicar un artículo, crea un archivo en `src/data/articulos/` y regístralo en `blog.ts` con `slug`, `titulo`, `descripcion`, `fecha`, `archivo` y `publicado: true`. Solo se leen archivos `.mdx` locales registrados; el motor bloquea JavaScript incrustado. `plantilla.mdx` es una guía sin publicar. Las rutas desconocidas devuelven 404.
 
+## Desplegar en Cloudflare Pages (carpeta estática)
+
+```sh
+npm run build:cloudflare
+```
+
+Genera `../alaryfes-cloudflare` — fuera del repositorio — con la web compilada
+a HTML, la función que recibe los formularios en `functions/api/contacto.js`,
+las cabeceras de seguridad y caché en `_headers`, y un `LEEME.md` con los pasos
+para el panel de Cloudflare. Esa carpeta se arrastra entera en
+**Workers y Pages → Pages → Subir recursos**.
+
+El script rehace la carpeta desde cero, comprueba tipos antes de compilar y
+prueba la función empaquetada (sin endpoint, sin consentimiento, con honeypot y
+con entrega fallida) antes de darla por buena. Para publicar en otra ruta:
+`npm run build:cloudflare -- /ruta/de/salida`.
+
+`CONTACT_WEBHOOK_URL` y `CONTACT_WEBHOOK_TOKEN` **no viajan en la carpeta**: se
+configuran como secretos en el panel del proyecto.
+
+Qué cambia respecto al despliegue con servidor:
+
+- La ruta `src/app/api` se aparta durante la compilación y su trabajo lo hace la
+  Pages Function, que comparte la misma validación.
+- `/blog/[slug]` se aparta mientras no haya artículos publicados; vuelve sola en
+  cuanto exista el primero.
+- Los precios de lanzamiento los recalcula el navegador, así que el cambio del 1
+  de enero de 2027 ocurre solo para quien visita la web. El HTML servido lleva
+  los precios del día de compilación, que es lo que ve Google: **recompila y
+  vuelve a subir la carpeta en enero de 2027.**
+
+Para comprobar la carpeta antes de subirla, hay un servidor que imita cómo
+resuelve Cloudflare las rutas y comprime como él:
+
+```sh
+node tests/servidor-estatico.mjs ../alaryfes-cloudflare
+# En otro terminal:
+TEST_BASE_URL=http://127.0.0.1:4321 node tests/browser-check.mjs
+```
+
 ## Desplegar en Vercel
 
 1. Importa este repositorio en Vercel y selecciona **Next.js**. La raíz del proyecto es la del repositorio.
@@ -86,7 +126,7 @@ No hay artículos, testimonios ni casos ficticios publicados. Para publicar un a
 4. Despliega primero una vista previa. Comprueba WhatsApp y el envío real hacia la hoja con datos de prueba autorizados.
 5. Añade `alaryfes.com` y, si lo usas, `www.alaryfes.com` en Domains. Aplica los registros DNS que indique Vercel y redirige `www` al dominio canónico.
 
-Se incluyen metadatos propios por página, Open Graph textual, URL canónica, `sitemap.xml`, `robots.txt`, LocalBusiness, Service, FAQPage y BreadcrumbList. No se ha inventado una imagen social; el logo original facilitado se conserva en `public/logo-original.png`.
+Se incluyen metadatos propios por página, Open Graph textual, URL canónica, `sitemap.xml`, `robots.txt`, LocalBusiness, Service, FAQPage y BreadcrumbList. No se ha inventado una imagen social. El logo del encabezado es `public/logo-marca.png`, de 172 px y 23 KB; el original de 1254 px se conserva sin publicar en `assets/logo-original.png`.
 
 La dirección legal publicada reproduce la facilitada, «Calle Velarde, Ceuta». Completa número y código postal si corresponden. La conexión y los proveedores efectivos de recepción deberán coincidir con lo descrito en privacidad. Referencias usadas para preparar esos textos: [información general de la LSSI, artículo 10](https://www.boe.es/buscar/act.php?id=BOE-A-2002-13758) y [deber de información de la AEPD](https://www.aepd.es/preguntas-frecuentes/2-tus-obligaciones-como-responsable-del-tratamiento/6-el-deber-de-informacion).
 

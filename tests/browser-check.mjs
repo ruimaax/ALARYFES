@@ -179,6 +179,11 @@ try {
     "Contact validation, consent, controlled submission and conversion event",
   );
   await page.unroute("**/api/contacto");
+  await page.goto(base + "/contacto?plan=medina");
+  await page
+    .locator("#contact-plan")
+    .evaluate((e) => e.value === "medina" || Promise.reject(e.value));
+  result.interactions.push("Plan preseleccionado desde la URL");
   await page.goto(base + "/recomienda");
   await page.getByLabel("Tu nombre *", { exact: true }).fill("Prueba local");
   await page.getByLabel("Nombre de tu negocio *").fill("Negocio de prueba");
@@ -228,12 +233,22 @@ try {
   result.interactions.push("Keyboard skip link receives visible focus");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(base + "/planes");
-  const animation = await page
-    .locator(".architecture")
-    .first()
-    .evaluate((e) => getComputedStyle(e).animationName);
-  assert.equal(animation, "none");
-  result.interactions.push("Reduced motion disables architectural reveal");
+  // Con movimiento reducido no se exige quietud absoluta, sino que nada se
+  // desplace y que nada quede escondido esperando una animación.
+  const quieto = await page.evaluate(() => {
+    const desplazado = [...document.querySelectorAll(".pieza, [data-reveal], .plan-price-value")]
+      .filter((e) => {
+        const cs = getComputedStyle(e);
+        return (
+          (cs.transform !== "none" && cs.transform !== "matrix(1, 0, 0, 1, 0, 0)") ||
+          Number(cs.opacity) < 1 ||
+          parseFloat(cs.animationDuration) > 0.01
+        );
+      });
+    return { desplazado: desplazado.length };
+  });
+  assert.equal(quieto.desplazado, 0, "movimiento reducido deja elementos animados u ocultos");
+  result.interactions.push("Reduced motion keeps everything still and visible");
   for (const route of [
     "/planes/inexistente",
     "/sectores/inexistente",

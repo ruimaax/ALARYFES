@@ -12,7 +12,6 @@ export const metadata = meta(
   sitio.descripcion,
   "/",
 );
-export const dynamic = "force-dynamic";
 export default function Home() {
   const now = new Date();
   return (

@@ -12,7 +12,6 @@ import { extras } from "@/data/extras";
 import { condiciones } from "@/data/cambios";
 import { comparativa, tablaTextos } from "@/data/servicios";
 import { JsonLd, meta } from "@/lib/seo";
-export const dynamic = "force-dynamic";
 export const metadata = meta("Planes y precios", sitio.planes.texto, "/planes");
 export default function PlanesPage() {
   const now = new Date();

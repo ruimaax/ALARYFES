@@ -4,12 +4,7 @@ import { ContactForm } from "@/components/contact-form";
 import { WhatsApp } from "@/components/whatsapp";
 import { meta } from "@/lib/seo";
 export const metadata = meta("Contacto", sitio.contacto.texto, "/contacto");
-export default async function ContactoPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ plan?: string }>;
-}) {
-  const { plan } = await searchParams;
+export default function ContactoPage() {
   return (
     <>
       <PageIntro
@@ -31,7 +26,7 @@ export default async function ContactoPage({
             <p>{sitio.contacto.local}</p>
             <p className="muted">{sitio.direccion}</p>
           </div>
-          <ContactForm selectedPlan={plan} />
+          <ContactForm />
         </div>
       </section>
     </>

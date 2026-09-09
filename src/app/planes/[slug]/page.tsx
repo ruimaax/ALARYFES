@@ -8,7 +8,9 @@ import { Architecture } from "@/components/architecture";
 import { WhatsApp } from "@/components/whatsapp";
 import { Faq, ContactCta } from "@/components/content";
 import { Breadcrumbs, JsonLd, meta } from "@/lib/seo";
-export const dynamic = "force-dynamic";
+export function generateStaticParams() {
+  return planes.map((p) => ({ slug: p.slug }));
+}
 export async function generateMetadata({
   params,
 }: {

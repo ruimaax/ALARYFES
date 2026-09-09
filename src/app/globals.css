@@ -14,6 +14,16 @@
   --color-borde: #dac8c0;
   --color-marca-oscura: #650e15;
   --diagram-fill: #650e15;
+  /* Movimiento: curvas fuertes, no las de serie del navegador. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-press: 160ms;
+  --dur-hover: 200ms;
+  --dur-panel: 250ms;
+  --dur-reveal: 600ms;
+  --textura-lace-tinta: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='37'%3E%3Cpath d='M23 0 30 11.5 44 18.5 30 25.5 23 37 16 25.5 2 18.5 16 11.5ZM0 0l46 37M46 0 0 37' fill='none' stroke='%23251716' stroke-width='.7'/%3E%3C/svg%3E");
+  --textura-lace: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='37'%3E%3Cpath d='M23 0 30 11.5 44 18.5 30 25.5 23 37 16 25.5 2 18.5 16 11.5ZM0 0l46 37M46 0 0 37' fill='none' stroke='%23fdf9ef' stroke-width='.7'/%3E%3C/svg%3E");
 }
 * {
   box-sizing: border-box;
@@ -421,12 +431,6 @@ img {
   line-height: 1.2;
   margin: 15px 0 9px;
 }
-.plan-price span {
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  margin-left: 5px;
-}
 .plan-setup {
   font-size: 0.92rem;
   color: #e6c5bf;
@@ -472,7 +476,7 @@ img {
   animation-delay: calc(var(--plan-index) * 0.16s);
 }
 .is-visible .plan-art .pieza {
-  animation: levantar 0.72s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+  animation: levantar 0.72s var(--ease-out) both;
   animation-delay: calc(
     var(--plan-index) * 0.16s + var(--d, 0) * 0.13s + 0.22s
   );
@@ -953,12 +957,29 @@ img {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  /* Menos movimiento y más suave, no cero: se conservan los cambios de
+     color y opacidad, que ayudan a entender la interfaz, y desaparece
+     todo lo que se desplaza, escala o gira. */
   *,
   *::before,
   *::after {
-    animation: none !important;
-    transition: none !important;
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 140ms !important;
+    transition-delay: 0ms !important;
+    transition-property: opacity, color, background-color, border-color, fill,
+      box-shadow !important;
     scroll-behavior: auto !important;
+  }
+  [data-reveal],
+  .pieza,
+  .solar,
+  .plan-price-value,
+  .plan-price-rule,
+  .steps article::before {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 /* Shared pages, content and responsive tables */
@@ -1788,16 +1809,21 @@ img {
 }
 
 /* ---------------------------------------------------------------
-   Sistema de movimiento. Todo entra por opacidad y transform, y el
-   bloque de prefers-reduced-motion de arriba lo desactiva entero.
+   Sistema de movimiento
+   Curvas y duraciones salen de los tokens de :root. Nada entra con
+   ease-in, nada dura más de 300ms salvo las revelaciones de scroll,
+   que son superficie de marketing. Todo el hover va con gating de
+   puntero fino, y todo lo táctil tiene respuesta al pulsar.
    La clase .motion-ready la pone el JS: sin JS nada queda oculto.
    --------------------------------------------------------------- */
+
+/* --- Revelación al hacer scroll --------------------------------- */
 .motion-ready [data-reveal] {
   opacity: 0;
   transform: translate3d(0, 22px, 0);
   transition:
-    opacity 0.62s cubic-bezier(0.22, 0.68, 0.32, 1),
-    transform 0.62s cubic-bezier(0.22, 0.68, 0.32, 1);
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
   transition-delay: calc(var(--i, 0) * 70ms);
   will-change: opacity, transform;
 }
@@ -1819,14 +1845,14 @@ img {
   transition-delay: calc(var(--i, 0) * 55ms);
 }
 
-/* Entrada del hero al cargar */
+/* --- Entrada de la portada -------------------------------------- */
 @media (prefers-reduced-motion: no-preference) {
   .hero-location,
   .hero h1,
   .hero-description,
   .hero-actions,
   .hero-base {
-    animation: subir 0.85s cubic-bezier(0.22, 0.68, 0.32, 1) both;
+    animation: subir 0.85s var(--ease-out) both;
   }
   .hero h1 {
     animation-delay: 0.08s;
@@ -1848,13 +1874,31 @@ img {
     transform: translate3d(0, calc(var(--scroll-y, 0) * -0.035px), 0);
   }
   .page-intro h1 {
-    animation: subir 0.7s cubic-bezier(0.22, 0.68, 0.32, 1) both;
+    animation: subir 0.7s var(--ease-out) both;
   }
   .page-intro .lead {
-    animation: subir 0.7s 0.1s cubic-bezier(0.22, 0.68, 0.32, 1) both;
+    animation: subir 0.7s 0.1s var(--ease-out) both;
   }
-  .whatsapp-float {
+  .whatsapp-float::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    border: 2px solid var(--color-acento);
     animation: latido 4.5s 2s infinite;
+    pointer-events: none;
+  }
+  /* Textura andalusí a la deriva sobre los fondos oscuros. */
+  .dark-section::before,
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: -37px -46px;
+    pointer-events: none;
+    background-image: var(--textura-lace);
+    background-size: 46px 37px;
+    opacity: 0.05;
+    animation: deriva 34s linear infinite;
   }
 }
 @keyframes subir {
@@ -1879,31 +1923,76 @@ img {
     clip-path: inset(0);
   }
 }
-@keyframes latido {
-  0%,
-  86%,
-  100% {
-    box-shadow:
-      0 4px 20px #25171620,
-      0 0 0 0 #be945d00;
-  }
-  88% {
-    box-shadow:
-      0 4px 20px #25171620,
-      0 0 0 0 #be945d99;
-  }
-  96% {
-    box-shadow:
-      0 4px 20px #25171620,
-      0 0 0 14px #be945d00;
+@keyframes deriva {
+  /* Un mosaico exacto: el bucle es invisible. */
+  to {
+    transform: translate3d(46px, 37px, 0);
   }
 }
+@keyframes latido {
+  0%,
+  86% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  88% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+.hero,
+.dark-section {
+  position: relative;
+  isolation: isolate;
+  /* La textura sangra una baldosa por cada lado: aquí se recorta. */
+  overflow: hidden;
+}
+.hero > *,
+.dark-section > * {
+  position: relative;
+  z-index: 1;
+}
 
-/* Cabecera que se condensa y barra de progreso de lectura */
+/* --- La obra se levanta: solar primero, después cada pieza ------- */
+.is-visible .plan-art .solar {
+  animation: replantear 0.8s both;
+  animation-delay: calc(var(--plan-index) * 0.16s);
+}
+.is-visible .plan-art .pieza {
+  animation: levantar 0.72s var(--ease-out) both;
+  animation-delay: calc(
+    var(--plan-index) * 0.16s + var(--d, 0) * 0.13s + 0.22s
+  );
+}
+@keyframes replantear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+@keyframes levantar {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+.plan-art svg {
+  transform-box: fill-box;
+}
+.plan-art .solar {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+/* --- Cabecera y progreso de lectura ----------------------------- */
 .site-header {
   transition:
-    height 0.32s ease,
-    box-shadow 0.32s ease;
+    height var(--dur-panel) var(--ease-out),
+    box-shadow var(--dur-panel) var(--ease-out);
 }
 .motion-ready.is-scrolled .site-header {
   position: sticky;
@@ -1922,7 +2011,7 @@ img {
   pointer-events: none;
 }
 
-/* Precio: el alta manda, la cuota va debajo */
+/* --- El alta inicial manda en la tarjeta ------------------------ */
 .plan-terms {
   display: flex;
   align-items: center;
@@ -1930,7 +2019,7 @@ img {
   font-size: 0.85rem;
   letter-spacing: 0.02em;
   color: #e6c5bf;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 .plan-term-tag {
   border: 1px solid #fdf9ef40;
@@ -1940,20 +2029,44 @@ img {
   color: var(--color-base);
 }
 .plan-price {
-  margin: 2px 0 10px;
+  margin: 2px 0 6px;
   overflow: hidden;
-  font-size: 3rem;
-  color: var(--color-base);
-}
-.plan-setup strong {
-  white-space: nowrap;
+  font-size: clamp(2.9rem, 4.4vw, 4.3rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+  color: var(--color-acento);
 }
 .plan-price-value {
   display: inline-block;
 }
+.plan-price-rule {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--color-acento);
+  opacity: 0.45;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  margin-bottom: 12px;
+}
+.is-visible .plan-price-rule {
+  transform: scaleX(1);
+  transition: transform 0.7s var(--ease-out);
+  transition-delay: calc(var(--plan-index, 0) * 0.16s + 0.5s);
+}
+.plan-setup {
+  font-size: 1rem;
+  color: #f0d5cc;
+}
+.plan-setup strong {
+  color: var(--color-base);
+  font-weight: 600;
+  white-space: nowrap;
+}
 @media (prefers-reduced-motion: no-preference) {
   .plan-price-value {
-    animation: cambio-precio 0.5s cubic-bezier(0.22, 0.68, 0.32, 1) both;
+    animation: cambio-precio 0.5s var(--ease-out) both;
   }
   .plan-term-tag {
     animation: cambio-etiqueta 0.4s both;
@@ -1971,68 +2084,99 @@ img {
 @keyframes cambio-etiqueta {
   from {
     opacity: 0;
-    transform: scale(0.82);
+    transform: scale(0.85);
   }
 }
-.term-control label {
+
+/* --- Respuesta al pulsar: sirve también en táctil ---------------- */
+.button,
+.term-control label,
+.plan-link,
+.sector-row,
+.whatsapp-float,
+.faq-list summary {
   transition:
-    background 0.28s ease,
-    color 0.28s ease,
-    transform 0.28s ease;
+    background-color var(--dur-hover) ease,
+    color var(--dur-hover) ease,
+    border-color var(--dur-hover) ease,
+    box-shadow var(--dur-hover) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
 }
-.term-control label:hover {
-  transform: translateY(-2px);
+.button:active,
+.term-control label:active,
+.whatsapp-float:active {
+  transform: scale(0.97);
+}
+.plan-link:active,
+.sector-row:active {
+  transform: scale(0.99);
 }
 
-/* Microinteracciones al pasar el ratón */
-.button,
-.plan-link,
-.text-link,
-.sector-row,
-.whatsapp-float {
-  transition:
-    background 0.28s ease,
-    color 0.28s ease,
-    transform 0.28s ease,
-    box-shadow 0.28s ease,
-    border-color 0.28s ease;
-}
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px #25171626;
-}
-.button:active {
-  transform: translateY(0);
-}
-.whatsapp-float:hover {
-  transform: scale(1.08) rotate(-6deg);
-}
-.plan-column {
-  transition: transform 0.4s cubic-bezier(0.22, 0.68, 0.32, 1);
-}
-.plan-column:hover {
-  transform: translateY(-6px);
-}
-.plan-column .architecture {
-  transition: color 0.4s ease;
+/* --- Hover: solo con puntero fino ------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px #25171626;
+  }
+  .button:active {
+    transform: translateY(0) scale(0.97);
+  }
+  .term-control label:hover {
+    transform: translateY(-2px);
+  }
+  .whatsapp-float:hover {
+    transform: scale(1.08) rotate(-6deg);
+  }
+  .plan-column:hover .plan-art {
+    transform: translateY(-8px) scale(1.05);
+  }
+  .plan-column:hover .architecture {
+    color: var(--color-base);
+  }
+  .plan-column:hover .plan-price {
+    color: #d8b47a;
+  }
+  .plan-link:hover span {
+    transform: rotate(90deg) scale(1.15);
+  }
+  .plan-link:hover::after {
+    transform: scaleX(1);
+  }
+  .responsive-table tbody tr:hover {
+    background: #980d0c0a;
+  }
+  .faq-list summary:hover {
+    color: var(--color-marca);
+  }
+  .desktop-nav a:hover::after,
+  .footer-main nav a:hover::after {
+    transform: scaleX(1);
+  }
+  .steps article:hover .step-number {
+    transform: translateY(-4px);
+  }
+  .sector-row:hover .sector-symbol {
+    transform: rotate(90deg);
+  }
+  .sector-row:hover .sector-plus {
+    transform: rotate(90deg) scale(1.2);
+  }
 }
 .plan-art {
-  transition: transform 0.5s cubic-bezier(0.22, 0.68, 0.32, 1);
+  transition: transform var(--dur-panel) var(--ease-out);
 }
-.plan-column:hover .architecture {
-  color: var(--color-base);
-}
-.plan-column:hover .plan-art {
-  transform: translateY(-8px) scale(1.05);
+.plan-column .architecture {
+  transition: color var(--dur-panel) ease;
 }
 .plan-link {
   position: relative;
 }
-.plan-link span {
-  transition: transform 0.32s cubic-bezier(0.22, 0.68, 0.32, 1);
-}
-.plan-link:hover span {
-  transform: rotate(90deg) scale(1.15);
+.plan-link span,
+.sector-symbol,
+.sector-plus,
+.step-number {
+  display: inline-block;
+  transition: transform var(--dur-panel) var(--ease-out);
 }
 .plan-link::after {
   content: "";
@@ -2044,22 +2188,13 @@ img {
   background: var(--color-acento);
   transform: scaleX(0);
   transform-origin: 0 50%;
-  transition: transform 0.4s cubic-bezier(0.22, 0.68, 0.32, 1);
-}
-.plan-link:hover::after {
-  transform: scaleX(1);
+  transition: transform var(--dur-panel) var(--ease-out);
 }
 .responsive-table tbody tr {
-  transition: background 0.25s ease;
-}
-.responsive-table tbody tr:hover {
-  background: #980d0c0a;
+  transition: background-color var(--dur-hover) ease;
 }
 .faq-list summary {
-  transition: color 0.25s ease;
-}
-.faq-list summary:hover {
-  color: var(--color-marca);
+  cursor: pointer;
 }
 .desktop-nav a,
 .footer-main nav a {
@@ -2076,21 +2211,10 @@ img {
   background: currentColor;
   transform: scaleX(0);
   transform-origin: 0 50%;
-  transition: transform 0.32s cubic-bezier(0.22, 0.68, 0.32, 1);
-}
-.desktop-nav a:hover::after,
-.footer-main nav a:hover::after {
-  transform: scaleX(1);
-}
-.step-number {
-  display: inline-block;
-  transition: transform 0.4s cubic-bezier(0.22, 0.68, 0.32, 1);
-}
-.steps article:hover .step-number {
-  transform: translateY(-4px);
+  transition: transform var(--dur-panel) var(--ease-out);
 }
 
-/* Vida continua: la obra respira, la cenefa corre y los pasos se trazan */
+/* --- Vida continua ---------------------------------------------- */
 @media (prefers-reduced-motion: no-preference) {
   .plan-art .architecture {
     animation: flotar 6.5s ease-in-out infinite alternate;
@@ -2126,6 +2250,121 @@ img {
 }
 .motion-ready .steps article.is-in::before {
   transform: scaleX(1);
-  transition: transform 0.9s cubic-bezier(0.22, 0.68, 0.32, 1);
+  transition: transform 0.9s var(--ease-out);
   transition-delay: calc(var(--i, 0) * 90ms + 180ms);
+}
+
+/* --- Paneles, campos y fondos claros ---------------------------- */
+/* La misma lacería, muy tenue, sobre las superficies claras. */
+@media (prefers-reduced-motion: no-preference) {
+  .surface-section,
+  .conditions-section,
+  .launch-band {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .surface-section::before,
+  .conditions-section::before,
+  .launch-band::before {
+    content: "";
+    position: absolute;
+    inset: -37px -46px;
+    z-index: -1;
+    pointer-events: none;
+    background-image: var(--textura-lace-tinta);
+    background-size: 46px 37px;
+    opacity: 0.05;
+    animation: deriva 46s linear infinite reverse;
+  }
+}
+
+/* El desplegable del FAQ: la marca gira y la respuesta entra. */
+.faq-list summary > span {
+  display: inline-block;
+  transition: transform var(--dur-panel) var(--ease-out);
+}
+.faq-list details[open] summary > span {
+  transform: rotate(45deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .faq-list details[open] p {
+    animation: desplegar var(--dur-panel) var(--ease-out) both;
+  }
+}
+@keyframes desplegar {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/* Campos: el foco se ve llegar. */
+.field input,
+.field select,
+.field textarea {
+  transition:
+    border-color var(--dur-hover) ease,
+    box-shadow var(--dur-hover) var(--ease-out),
+    background-color var(--dur-hover) ease;
+}
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  border-color: var(--color-marca);
+  box-shadow: 0 0 0 3px #980d0c1f;
+}
+@media (hover: hover) and (pointer: fine) {
+  .field input:hover,
+  .field select:hover,
+  .field textarea:hover {
+    border-color: var(--color-tinta-suave);
+  }
+}
+
+/* Botón de acento: un barrido de luz al pasar por encima. */
+.button-gold {
+  position: relative;
+  overflow: hidden;
+}
+.button-gold::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 45%;
+  background: linear-gradient(100deg, #fff0 0%, #ffffff5c 50%, #fff0 100%);
+  transform: translateX(-160%) skewX(-18deg);
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .button-gold:hover::after {
+    transform: translateX(320%) skewX(-18deg);
+    transition: transform 620ms var(--ease-out);
+  }
+}
+
+/* Aviso de lanzamiento: la fecha late despacio, sin gritar. */
+.launch-band .launch-date {
+  position: relative;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .launch-band .launch-date::before {
+    content: "";
+    position: absolute;
+    inset: -6px -10px;
+    border: 1px solid var(--color-marca);
+    opacity: 0;
+    animation: recordar 5s var(--ease-out) infinite;
+  }
+}
+@keyframes recordar {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.94);
+  }
+  55%,
+  100% {
+    opacity: 0;
+    transform: scale(1.06);
+  }
 }

@@ -6,6 +6,9 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { articulosPublicados } from "@/data/blog";
 import { sitio } from "@/data/sitio";
 import { Breadcrumbs, JsonLd, meta } from "@/lib/seo";
+export function generateStaticParams() {
+  return articulosPublicados().map((a) => ({ slug: a.slug }));
+}
 export async function generateMetadata({
   params,
 }: {

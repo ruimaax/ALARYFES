@@ -6,7 +6,9 @@ import { sitio } from "@/data/sitio";
 import { PageIntro, ContactCta } from "@/components/content";
 import { Architecture } from "@/components/architecture";
 import { meta } from "@/lib/seo";
-export const dynamic = "force-dynamic";
+export function generateStaticParams() {
+  return sectores.map((s) => ({ slug: s.slug }));
+}
 export async function generateMetadata({
   params,
 }: {

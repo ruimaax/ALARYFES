@@ -3,6 +3,7 @@ import { sitio } from "@/data/sitio";
 import { planes } from "@/data/planes";
 import { sectores } from "@/data/sectores";
 import { articulosPublicados } from "@/data/blog";
+export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     "/",
