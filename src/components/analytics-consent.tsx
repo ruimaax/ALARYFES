@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Script from "next/script";
 import { cookiesTextos } from "@/data/legal";
+import { StarBorder } from "./star-border";
 const ga = process.env.NEXT_PUBLIC_GA_ID || "";
 const pixel = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
 const enabled = /^G-[A-Z0-9]+$/.test(ga) || /^\d+$/.test(pixel);
@@ -35,20 +36,20 @@ export function AnalyticsConsent({ settings = false }: { settings?: boolean }) {
   }
   const controls = (
     <div className="consent-actions">
-      <button
+      <StarBorder
         type="button"
         className="button button-outline"
         onClick={() => choose("rejected")}
       >
         {cookiesTextos.rechazar}
-      </button>
-      <button
+      </StarBorder>
+      <StarBorder
         type="button"
         className="button button-outline"
         onClick={() => choose("accepted")}
       >
         {cookiesTextos.aceptar}
-      </button>
+      </StarBorder>
     </div>
   );
   if (settings)

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Faustina, Source_Sans_3 } from "next/font/google";
 import { AnalyticsConsent } from "@/components/analytics-consent";
+import { Grainient } from "@/components/grainient";
 import { Motion } from "@/components/motion";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -41,6 +42,18 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${serif.variable} ${sans.variable}`}>
       <body>
+        {/* Crema base, ocre de acento y rosa del titular, todos claros: el
+            texto tinta conserva el contraste encima. */}
+        <div className="site-background" aria-hidden="true">
+          <Grainient
+            color1="#fdf9ef"
+            color2="#ead3ae"
+            color3="#ecc9bd"
+            timeSpeed={0.18}
+            contrast={1}
+            grainAmount={0.05}
+          />
+        </div>
         <a href="#contenido" className="skip-link">
           Saltar al contenido
         </a>

@@ -6,6 +6,7 @@ import { sitio } from "@/data/sitio";
 import { planes } from "@/data/planes";
 import { validateContact } from "@/lib/contact-validation";
 import { track } from "@/lib/analytics";
+import { StarBorder } from "./star-border";
 export function ContactForm({
   referral = false,
   selectedPlan = "",
@@ -201,7 +202,7 @@ export function ContactForm({
           <Link href="/politica-privacidad">{privacidadBasica.enlace}</Link>.
         </p>
       </div>
-      <button
+      <StarBorder
         className="button button-gold"
         type="submit"
         disabled={status === "loading" || status === "success"}
@@ -211,7 +212,7 @@ export function ContactForm({
           : referral
             ? sitio.acciones.recomendar
             : sitio.acciones.enviar}
-      </button>
+      </StarBorder>
       <div className={`form-status ${status}`} role="status" aria-live="polite">
         {message}
       </div>

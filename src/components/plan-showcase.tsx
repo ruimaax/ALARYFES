@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Architecture } from "./architecture";
+import { SpotlightCard } from "./spotlight-card";
 import { planes, preciosDe, euros, type Plan } from "@/data/planes";
 import { sitio } from "@/data/sitio";
 
@@ -94,42 +95,44 @@ function PlanColumn({
       className="plan-column"
       style={{ "--plan-index": index } as React.CSSProperties}
     >
-      <div className="plan-art">
-        <Architecture plan={plan.slug} />
-      </div>
-      <div className="plan-info">
-        <h3>{plan.nombre}</h3>
-        <p className="plan-descriptor">{plan.descriptor}</p>
-        <p className="plan-terms">
-          {sitio.planes.alta}
-          <span key={term} className="plan-term-tag">
-            {term === 3 ? sitio.planes.tres : sitio.planes.doce}
-          </span>
-        </p>
-        <p className="plan-price">
-          <span key={term} className="plan-price-value">
-            {euros(term === 3 ? prices.alta3 : prices.alta12)}
-          </span>
-        </p>
-        <span className="plan-price-rule" aria-hidden="true" />
-        <p className="plan-setup">
-          {sitio.planes.luego},{" "}
-          <strong>
-            {euros(prices.mensual)}
-            {sitio.hero.unidad}
-          </strong>
-        </p>
-        {detailed && (
-          <>
-            <p className="plan-tagline">{plan.bajada}</p>
-            <p className="plan-delivery">{plan.plazo}</p>
-          </>
-        )}
-        <Link className="plan-link" href={`/planes/${plan.slug}`}>
-          {sitio.acciones.detalle}
-          <span aria-hidden="true">+</span>
-        </Link>
-      </div>
+      <SpotlightCard className="plan-card">
+        <div className="plan-art">
+          <Architecture plan={plan.slug} />
+        </div>
+        <div className="plan-info">
+          <h3>{plan.nombre}</h3>
+          <p className="plan-descriptor">{plan.descriptor}</p>
+          <p className="plan-terms">
+            {sitio.planes.alta}
+            <span key={term} className="plan-term-tag">
+              {term === 3 ? sitio.planes.tres : sitio.planes.doce}
+            </span>
+          </p>
+          <p className="plan-price">
+            <span key={term} className="plan-price-value">
+              {euros(term === 3 ? prices.alta3 : prices.alta12)}
+            </span>
+          </p>
+          <span className="plan-price-rule" aria-hidden="true" />
+          <p className="plan-setup">
+            {sitio.planes.luego},{" "}
+            <strong>
+              {euros(prices.mensual)}
+              {sitio.hero.unidad}
+            </strong>
+          </p>
+          {detailed && (
+            <>
+              <p className="plan-tagline">{plan.bajada}</p>
+              <p className="plan-delivery">{plan.plazo}</p>
+            </>
+          )}
+          <Link className="plan-link" href={`/planes/${plan.slug}`}>
+            {sitio.acciones.detalle}
+            <span aria-hidden="true">+</span>
+          </Link>
+        </div>
+      </SpotlightCard>
     </article>
   );
 }

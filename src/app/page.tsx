@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LaunchNotice } from "@/components/launch-notice";
+import { StarBorder } from "@/components/star-border";
 import { sitio } from "@/data/sitio";
 import { planes, preciosDe, euros } from "@/data/planes";
 import { WhatsApp } from "@/components/whatsapp";
@@ -29,9 +30,13 @@ export default function Home() {
           <p className="hero-description">{sitio.descripcion}</p>
           <div className="hero-actions">
             <WhatsApp />
-            <Link className="button button-outline" href="/planes">
+            <StarBorder
+              as={Link}
+              className="button button-outline"
+              href="/planes"
+            >
               {sitio.acciones.planes}
-            </Link>
+            </StarBorder>
           </div>
           <div className="hero-base">
             <p>{sitio.hero.pie}</p>
@@ -67,9 +72,13 @@ export default function Home() {
           </div>
           <PlanShowcase initialDate={now.toISOString()} />
           <div className="center">
-            <Link href="/planes" className="button button-outline">
+            <StarBorder
+              as={Link}
+              href="/planes"
+              className="button button-outline"
+            >
               {sitio.acciones.comparar}
-            </Link>
+            </StarBorder>
           </div>
         </div>
       </section>
