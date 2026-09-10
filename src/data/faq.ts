@@ -3,7 +3,7 @@ export const faq: Pregunta[] = [
   {
     pregunta: "¿Qué pasa si me quiero ir? ¿Me quedo sin web?",
     respuesta:
-      "Si cancelas, el dominio es tuyo desde el primer día, siempre. La web, el hosting y la base de datos son nuestros mientras dure el contrato, así que al causar baja la web se despublica. Si quieres llevártela, la migramos por 250€ sin IVA/IPSI. La permanencia mínima es de 3 meses y la baja requiere 30 días de aviso. Si elegiste 12 meses y cancelas antes, se factura la diferencia entre las dos altas.",
+      "Si cancelas, el dominio es tuyo desde el primer día, siempre. La web, el hosting y la base de datos son nuestros mientras dure el contrato, así que al causar baja la web se despublica. Si quieres llevártela, la migración se presupuesta aparte. La permanencia mínima es de 3 meses y la baja requiere 30 días de aviso. Si elegiste 12 meses y cancelas antes, se factura la diferencia entre las dos altas.",
   },
   {
     pregunta: "¿El dominio es mío?",
@@ -13,7 +13,7 @@ export const faq: Pregunta[] = [
   {
     pregunta: "¿Y si no tengo fotos ni vídeos de mi negocio?",
     respuesta:
-      "En Cimiento y Torre puedes aportar tu material o podemos usar banco de imágenes. Una sesión adicional de fotos o vídeo de 2 horas cuesta 250€ sin IVA/IPSI. Alcazaba incluye una sesión de contenido mensual de 1 hora; Medina incluye dos sesiones de 1 hora al mes. No incluyen fotografía de estudio ni producción audiovisual avanzada.",
+      "En Cimiento y Torre puedes aportar tu material o podemos usar banco de imágenes. Las sesiones adicionales de fotos o vídeo se presupuestan según lo que necesites. Alcazaba incluye una sesión de contenido mensual de 1 hora; Medina incluye dos sesiones de 1 hora al mes. No incluyen fotografía de estudio ni producción audiovisual avanzada.",
   },
   {
     pregunta: "¿Cuánto tarda en estar lista?",
@@ -23,7 +23,7 @@ export const faq: Pregunta[] = [
   {
     pregunta: "¿La inversión en anuncios está incluida?",
     respuesta:
-      "No. Medina incluye la gestión de hasta 2 campañas activas simultáneas en Meta (Instagram y Facebook), pero la inversión publicitaria se paga aparte. Recomendamos entre 200€ y 400€ al mes según el sector. Google Ads no forma parte del servicio.",
+      "No. Medina incluye la gestión de hasta 2 campañas activas simultáneas en Meta (Instagram y Facebook), pero la inversión publicitaria se paga aparte. Recomendamos entre 200€ y 400€ al mes según el alcance de la campaña y el público. Google Ads no forma parte del servicio.",
   },
   {
     pregunta: "¿Puedo cambiar de plan más adelante?",

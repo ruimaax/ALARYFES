@@ -4,7 +4,6 @@ import Link from "next/link";
 import { privacidadBasica } from "@/data/legal";
 import { sitio } from "@/data/sitio";
 import { planes } from "@/data/planes";
-import { sectores } from "@/data/sectores";
 import { validateContact } from "@/lib/contact-validation";
 import { track } from "@/lib/analytics";
 export function ContactForm({
@@ -129,32 +128,7 @@ export function ContactForm({
         ) : (
           <>
             {field("telefono", sitio.contacto.telefono, "tel", 25)}
-            <div className="field">
-              <label htmlFor={`${prefix}-sector`}>
-                {sitio.contacto.sector} *
-              </label>
-              <select
-                id={`${prefix}-sector`}
-                name="sector"
-                defaultValue=""
-                required
-                aria-invalid={!!errors.sector}
-                aria-describedby={
-                  errors.sector ? `${prefix}-sector-error` : undefined
-                }
-              >
-                <option value="" disabled>
-                  {sitio.contacto.eligeSector}
-                </option>
-                {sectores.map((s) => (
-                  <option key={s.slug} value={s.slug}>
-                    {s.nombre}
-                  </option>
-                ))}
-                <option value="otro">{sitio.contacto.otro}</option>
-              </select>
-              <FieldError name="sector" errors={errors} prefix={prefix} />
-            </div>
+            {field("sector", sitio.contacto.sector)}
             <div className="field full">
               <label htmlFor={`${prefix}-plan`}>{sitio.contacto.plan}</label>
               <select

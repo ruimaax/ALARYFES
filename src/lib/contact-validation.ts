@@ -1,5 +1,4 @@
 import { planes } from "@/data/planes";
-import { sectores } from "@/data/sectores";
 export type ContactPayload = {
   tipo: "contacto" | "recomendacion";
   nombre: string;
@@ -54,8 +53,6 @@ export function validateContact(input: unknown): ValidationResult {
     if (!phone(data.telefono))
       errors.telefono = "Introduce un teléfono válido.";
     data.sector = str("sector");
-    if (![...sectores.map((s) => s.slug), "otro"].includes(data.sector))
-      errors.sector = "Selecciona un tipo de negocio.";
     data.plan = str("plan", false);
     if (data.plan && !planes.some((p) => p.slug === data.plan))
       errors.plan = "Selecciona un plan válido.";

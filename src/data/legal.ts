@@ -30,7 +30,7 @@ export const legales: Record<string, LegalPage> = {
       {
         titulo: "Precios y condiciones",
         texto:
-          "Los precios se muestran sin IVA/IPSI. Las altas de lanzamiento se aplican hasta el 31 de diciembre de 2026. Consulta en la página de planes los compromisos, pagos, cambios de plan y condiciones de cancelación.",
+          "Los precios se muestran sin IVA. Las altas de lanzamiento se aplican hasta el 31 de diciembre de 2026. Consulta en la página de planes los compromisos, pagos, cambios de plan y condiciones de cancelación.",
       },
       {
         titulo: "Contenidos y enlaces",
@@ -55,7 +55,7 @@ export const legales: Record<string, LegalPage> = {
       {
         titulo: "Datos y finalidad",
         texto:
-          "El formulario de contacto recoge nombre, negocio, teléfono, sector, plan de interés y mensaje para atender la consulta y preparar una propuesta si la solicitas. El formulario de recomendación recoge tus datos y el nombre y contacto del negocio recomendado para registrar la recomendación y comprobar sus condiciones. No incluyas datos de salud ni otra información sensible en el mensaje.",
+          "El formulario de contacto recoge nombre, negocio, teléfono, tipo de empresa o proyecto, plan de interés y mensaje para atender la consulta y preparar una propuesta si la solicitas. El formulario de recomendación recoge tus datos y el nombre y contacto del negocio recomendado para registrar la recomendación y comprobar sus condiciones. No incluyas datos de salud ni otra información sensible en el mensaje.",
       },
       {
         titulo: "Base del tratamiento",

@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { enLanzamiento, planes, preciosDe } from "../src/data/planes";
-test("switches prices exactly at midnight in Ceuta on 1 January 2027", () => {
+test("switches prices exactly at midnight in mainland Spain on 1 January 2027", () => {
   const before = new Date("2026-12-31T22:59:59.999Z");
   const after = new Date("2026-12-31T23:00:00.000Z");
   assert.equal(enLanzamiento(before), true);

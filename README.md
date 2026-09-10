@@ -39,9 +39,9 @@ Todo el contenido comercial está en archivos TypeScript de `src/data/`.
 | `blog.ts` y `articulos/` | Índice editorial y artículos locales MDX |
 | `interfaz.ts` | Textos compartidos de interfaz |
 
-Cada plan tiene `lanzamiento` y `normal`, ambos con `alta3`, `alta12` y `mensual`. `FECHA_FIN_LANZAMIENTO = '2026-12-31'`. La comparación usa la fecha civil de Ceuta (`Europe/Madrid`, misma zona horaria) y cambia a tarifas normales a las 00:00 del 1 de enero de 2027. Las páginas con precios se renderizan por petición: **no hay que recompilar el 1 de enero**. El selector de compromiso no cambia la cuota, solo el alta. El bloque de planes vuelve a comprobar la fecha cada minuto si se deja abierto.
+Cada plan tiene `lanzamiento` y `normal`, ambos con `alta3`, `alta12` y `mensual`. `FECHA_FIN_LANZAMIENTO = '2026-12-31'`. La comparación usa la fecha civil de España peninsular (`Europe/Madrid`) y cambia a tarifas normales a las 00:00 del 1 de enero de 2027. Las páginas con precios se renderizan por petición: **no hay que recompilar el 1 de enero**. El selector de compromiso no cambia la cuota, solo el alta. El bloque de planes vuelve a comprobar la fecha cada minuto si se deja abierto.
 
-La garantía general de cuota es de 24 meses. El Círculo ofrece una congelación de por vida al alcanzar 3 referidos y la identifica como excepción ganada. La cancelación se explica en la página general, en cada plan y en el FAQ: dominio del cliente, despublicación de la web y migración opcional de 250€.
+La garantía general de cuota es de 24 meses. El Círculo ofrece una congelación de por vida al alcanzar 3 referidos y la identifica como excepción ganada. La cancelación se explica en la página general, en cada plan y en el FAQ: dominio del cliente, despublicación de la web y migración opcional a consultar.
 
 Medina incluye campañas únicamente en Meta (Instagram y Facebook). El ejemplo de clínica conserva el argumento aprobado, con el contexto necesario: facturación no es margen y gasto anual del cliente no equivale a cobro mensual.
 
@@ -128,7 +128,7 @@ TEST_BASE_URL=http://127.0.0.1:4321 node tests/browser-check.mjs
 
 Se incluyen metadatos propios por página, Open Graph textual, URL canónica, `sitemap.xml`, `robots.txt`, LocalBusiness, Service, FAQPage y BreadcrumbList. No se ha inventado una imagen social. El logo del encabezado es `public/logo-marca.png`, de 172 px y 23 KB; el original de 1254 px se conserva sin publicar en `assets/logo-original.png`.
 
-La dirección legal publicada reproduce la facilitada, «Calle Velarde, Ceuta». Completa número y código postal si corresponden. La conexión y los proveedores efectivos de recepción deberán coincidir con lo descrito en privacidad. Referencias usadas para preparar esos textos: [información general de la LSSI, artículo 10](https://www.boe.es/buscar/act.php?id=BOE-A-2002-13758) y [deber de información de la AEPD](https://www.aepd.es/preguntas-frecuentes/2-tus-obligaciones-como-responsable-del-tratamiento/6-el-deber-de-informacion).
+La dirección legal publicada se configura con `NEXT_PUBLIC_LEGAL_ADDRESS`; el valor provisional indica Granada y debe sustituirse por la dirección completa antes de publicar. La conexión y los proveedores efectivos de recepción deberán coincidir con lo descrito en privacidad. Referencias usadas para preparar esos textos: [información general de la LSSI, artículo 10](https://www.boe.es/buscar/act.php?id=BOE-A-2002-13758) y [deber de información de la AEPD](https://www.aepd.es/preguntas-frecuentes/2-tus-obligaciones-como-responsable-del-tratamiento/6-el-deber-de-informacion).
 
 ## Verificación
 
@@ -152,7 +152,6 @@ Lighthouse sobre la compilación de producción con emulación móvil (medición
 | `/` | 96 | 100 | 100 | 100 |
 | `/planes` | 98 | 100 | 100 | 100 |
 | `/contacto` | 97 | 100 | 100 | 100 |
-| `/sectores/clinicas-esteticas` | 97 | 100 | 100 | 100 |
 | `/recomienda` | 97 | 100 | 100 | 100 |
 
 Estas cifras no sustituyen la medición tras el despliegue y la conexión de herramientas externas.

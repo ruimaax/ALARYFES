@@ -1,7 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { sitio } from "@/data/sitio";
-import { sectores } from "@/data/sectores";
 import { planes } from "@/data/planes";
 import { track } from "@/lib/analytics";
 
@@ -16,12 +15,9 @@ export function WhatsApp({
 }) {
   const path = usePathname();
   const plan = planes.find((p) => path === `/planes/${p.slug}`);
-  const sector = sectores.find((s) => path === `/sectores/${s.slug}`);
-  const message = sector
-    ? sector.mensaje
-    : plan
-      ? `${sitio.contacto.whatsappPlan} ${plan.nombre}`
-      : `${sitio.contacto.whatsappMensaje}${path === "/" ? "" : ` ${sitio.contacto.whatsappPagina} ${path}.`}`;
+  const message = plan
+    ? `${sitio.contacto.whatsappPlan} ${plan.nombre}`
+    : `${sitio.contacto.whatsappMensaje}${path === "/" ? "" : ` ${sitio.contacto.whatsappPagina} ${path}.`}`;
   return (
     <a
       className={

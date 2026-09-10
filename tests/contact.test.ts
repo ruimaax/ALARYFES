@@ -6,20 +6,20 @@ const valid = {
   nombre: "Prueba",
   negocio: "Negocio de prueba",
   telefono: "600000000",
-  sector: "barberias",
+  sector: "Estudio de arquitectura",
   plan: "cimiento",
   mensaje: "Prueba automatizada local",
   consentimiento: true,
   website: "",
 };
-test("requires consent, validates sector and rejects oversized content", () => {
+test("requires consent, accepts any company type and rejects oversized content", () => {
   assert.equal(validateContact(valid).ok, true);
   for (const patch of [
     { consentimiento: false },
     { consentimiento: "true" },
     { telefono: "hola" },
     { plan: "inventado" },
-    { sector: "inventado" },
+    { sector: "" },
     { mensaje: "x".repeat(3001) },
     { tipo: "otro" },
   ])

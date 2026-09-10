@@ -12,7 +12,7 @@ export const politicaCambios = {
   bajar:
     "Si bajas de plan: todo lo construido sigue ahí. Las páginas, el SEO, las integraciones. Solo se ajusta el trabajo mensual.",
   cancelar:
-    "Si cancelas: el dominio es tuyo desde el primer día, siempre. La web, el hosting y la base de datos son nuestros mientras dure el contrato, así que al causar baja la web se despublica. Si quieres llevártela, la migramos por 250€.",
+    "Si cancelas: el dominio es tuyo desde el primer día, siempre. La web, el hosting y la base de datos son nuestros mientras dure el contrato, así que al causar baja la web se despublica. Si quieres llevártela, la migración se presupuesta aparte.",
   compromiso:
     "El precio con compromiso implica 12 meses nuevos contados desde la fecha del cambio.",
 };
@@ -25,5 +25,5 @@ export const condiciones: string[] = [
   politicaCambios.cancelar,
   "Tu cuota no sube durante los primeros 24 meses. A partir de ahí, revisión anual según IPC. Excepción: con 3 referidos, el Círculo de Alarifes permite ganar la cuota congelada de por vida.",
   "Todo el contenido se aprueba por adelantado en un calendario mensual.",
-  "Precios sin IVA/IPSI.",
+  "Precios sin IVA.",
 ];

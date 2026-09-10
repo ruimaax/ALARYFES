@@ -2,7 +2,6 @@ import Link from "next/link";
 import { servicios, tablaTextos } from "@/data/servicios";
 import { extras } from "@/data/extras";
 import { sitio } from "@/data/sitio";
-import { euros } from "@/data/planes";
 import { PageIntro, ResponsiveTable, ContactCta } from "@/components/content";
 import { meta } from "@/lib/seo";
 export const metadata = meta("Servicios", servicios.descripcion, "/servicios");
@@ -38,14 +37,9 @@ export default function ServiciosPage() {
           <ResponsiveTable
             caption={sitio.planes.extras}
             headers={[tablaTextos.concepto, tablaTextos.precio]}
-            rows={extras.map((e) => [
-              e.concepto,
-              [e.precio !== null ? euros(e.precio) : "", e.detalle]
-                .filter(Boolean)
-                .join(" "),
-            ])}
+            rows={extras.map((e) => [e.concepto, tablaTextos.consultar])}
           />
-          <p className="table-note">{sitio.planes.fiscal}</p>
+          <p className="table-note">{sitio.planes.extrasNota}</p>
         </div>
       </section>
       <ContactCta />

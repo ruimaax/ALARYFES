@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { sitio } from "@/data/sitio";
 import { planes } from "@/data/planes";
-import { sectores } from "@/data/sectores";
 import { articulosPublicados } from "@/data/blog";
 export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,8 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/planes",
     ...planes.map((p) => `/planes/${p.slug}`),
     "/servicios",
-    "/sectores",
-    ...sectores.map((s) => `/sectores/${s.slug}`),
     "/casos",
     "/sobre-nosotros",
     "/recomienda",

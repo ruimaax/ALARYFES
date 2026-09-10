@@ -168,7 +168,7 @@ export const planes: Plan[] = [
       "inversión publicitaria, producción audiovisual avanzada, gestión de varias sedes, garantía de un volumen concreto de ventas.",
     hereda: "alcazaba",
     avisos: [
-      "La inversión publicitaria va aparte. Recomendamos entre 200€ y 400€ al mes según el sector. Por debajo de 5€ al día las plataformas no tienen datos suficientes para funcionar.",
+      "La inversión publicitaria va aparte. Recomendamos entre 200€ y 400€ al mes según el alcance de la campaña y el público. Por debajo de 5€ al día las plataformas no tienen datos suficientes para funcionar.",
       "Los recordatorios de cita se configuran en el sistema de reservas del cliente.",
       "Sedes adicionales: +40% sobre la cuota por cada sede extra.",
     ],

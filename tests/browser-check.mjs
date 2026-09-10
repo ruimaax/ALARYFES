@@ -11,10 +11,6 @@ const routes = [
   "/planes/alcazaba",
   "/planes/medina",
   "/servicios",
-  "/sectores",
-  "/sectores/clinicas-esteticas",
-  "/sectores/peluquerias",
-  "/sectores/barberias",
   "/casos",
   "/sobre-nosotros",
   "/recomienda",
@@ -89,7 +85,6 @@ try {
     "/planes/medina",
     "/recomienda",
     "/contacto",
-    "/sectores/clinicas-esteticas",
     "/politica-cookies",
   ]) {
     await page.goto(base + route);
@@ -148,7 +143,9 @@ try {
   await page.getByLabel("Tu nombre *", { exact: true }).fill("Prueba local");
   await page.getByLabel("Nombre de tu negocio *").fill("Negocio de prueba");
   await page.getByLabel("Teléfono *", { exact: true }).fill("600000000");
-  await page.getByLabel("Tipo de negocio *").selectOption("barberias");
+  await page
+    .getByLabel("Tipo de empresa o proyecto *")
+    .fill("Estudio de arquitectura");
   await page
     .getByLabel("¿Qué necesitas? *")
     .fill("Prueba de interfaz. No enviar.");
@@ -168,7 +165,7 @@ try {
   await page.getByRole("button", { name: "Enviar mi consulta" }).click();
   await page.getByText("Prueba recibida correctamente.").waitFor();
   assert.equal(submitted.consentimiento, true);
-  assert.equal(submitted.sector, "barberias");
+  assert.equal(submitted.sector, "Estudio de arquitectura");
   assert.equal(
     await page.evaluate(() =>
       window.dataLayer.some((e) => e.event === "Contacto"),
@@ -251,7 +248,7 @@ try {
   result.interactions.push("Reduced motion keeps everything still and visible");
   for (const route of [
     "/planes/inexistente",
-    "/sectores/inexistente",
+    "/sectores",
     "/blog/inexistente",
     "/pagina-inexistente",
   ])

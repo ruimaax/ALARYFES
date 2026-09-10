@@ -20,6 +20,6 @@ export const interfaz = {
     "Las cantidades y prestaciones del plan actual sustituyen a las anteriores cuando amplían el mismo servicio.",
   condiciones: "Consultar todas las condiciones y los cambios de plan",
   servicio: "Planes de presencia digital ALARYFES",
-  oferta: "Cuota mensual sin IVA/IPSI; alta inicial aparte.",
+  oferta: "Cuota mensual sin IVA; alta inicial aparte.",
   logoAlt: "Emblema de ALARYFES: arco andalusí rojo con columnas ocres",
 };

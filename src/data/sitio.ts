@@ -1,8 +1,8 @@
 export const sitio = {
   nombre: "ALARYFES",
   telefonoVisible: "+34 623 173 625",
-  localidad: "Ceuta",
-  area: "Ceuta y Andalucía",
+  localidad: "Granada",
+  area: "España",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://alaryfes.com",
   whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP || "34623173625").replace(
     /\D/g,
@@ -11,13 +11,12 @@ export const sitio = {
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hola@alaryfes.com",
   titular: process.env.NEXT_PUBLIC_LEGAL_NAME || "Adrian Ruiz Matas",
   nif: process.env.NEXT_PUBLIC_LEGAL_NIF || "77449154N",
-  direccion: process.env.NEXT_PUBLIC_LEGAL_ADDRESS || "Calle Velarde, Ceuta",
+  direccion: process.env.NEXT_PUBLIC_LEGAL_ADDRESS || "Granada, España",
   descripcion:
-    "Te montamos la web, te llevamos las redes y nos ocupamos de que aparezcas en Google cuando alguien busque tu servicio en tu barrio.",
+    "Te montamos la web, te llevamos las redes y nos ocupamos de que aparezcas en Google cuando tus clientes busquen lo que ofreces.",
   navegacion: [
     { titulo: "Planes", href: "/planes" },
     { titulo: "Servicios", href: "/servicios" },
-    { titulo: "Sectores", href: "/sectores" },
     { titulo: "Nosotros", href: "/sobre-nosotros" },
   ],
   legales: [
@@ -31,7 +30,7 @@ export const sitio = {
     { titulo: "Blog", href: "/blog" },
   ],
   hero: {
-    contexto: "Desde Ceuta, para los negocios de Andalucía.",
+    contexto: "Desde Granada, para empresas de toda España.",
     titulo: "Tu negocio tiene mucho que ofrecer.",
     remate: "Que lo encuentren.",
     pie: "Web · Google · Redes sociales",
@@ -39,7 +38,7 @@ export const sitio = {
     precio: "Planes desde",
     unidad: "/mes",
     alta: "+ alta inicial",
-    impuesto: "Precios sin IVA/IPSI.",
+    impuesto: "IVA no incluido.",
   },
   acciones: {
     whatsapp: "Escribir por WhatsApp",
@@ -76,7 +75,7 @@ export const sitio = {
     herencia: "Todo lo de",
     mas: ", más:",
     detalle: "Conoce el plan",
-    fiscal: "Todos los precios se muestran sin IVA/IPSI.",
+    fiscal: "Todos los precios se muestran sin IVA.",
     garantia: "Tu cuota no sube durante los primeros 24 meses.",
     comparativa: "Compara el trabajo, no solo el precio.",
     extras: "Si necesitas algo más.",
@@ -112,12 +111,6 @@ export const sitio = {
       },
     ],
   },
-  sectores: {
-    titulo: "El mismo cuidado. Distintos negocios.",
-    texto:
-      "No necesita lo mismo una clínica que una barbería. Por eso empezamos escuchando.",
-    enlace: "Ver cómo te ayudamos",
-  },
   lanzamiento: {
     titulo: "Empieza con el alta de lanzamiento.",
     texto:
@@ -129,7 +122,7 @@ export const sitio = {
     titulo: "Hablemos de lo que quieres construir.",
     texto:
       "Cuéntanos qué negocio tienes. Te diremos por dónde empezar, qué incluye y cuánto cuesta.",
-    local: "En Ceuta. Cerca de tu negocio.",
+    local: "Operamos desde Granada y trabajamos contigo estés donde estés.",
     pendiente:
       "Estamos preparando el canal de WhatsApp. Puedes dejarnos tu consulta en el formulario.",
     whatsappMensaje: "Hola, quiero información para mi negocio.",
@@ -147,12 +140,10 @@ export const sitio = {
     nombre: "Tu nombre",
     negocio: "Nombre de tu negocio",
     telefono: "Teléfono",
-    sector: "Tipo de negocio",
+    sector: "Tipo de empresa o proyecto",
     plan: "Plan de interés (opcional)",
     mensaje: "¿Qué necesitas?",
-    otro: "Otro",
     sinPlan: "Todavía no lo sé",
-    eligeSector: "Selecciona tu sector",
     requerido: "Los campos marcados con * son obligatorios.",
     validacion:
       "Revisa los campos indicados y acepta la política de privacidad.",
@@ -167,7 +158,7 @@ export const sitio = {
   footer: {
     frase: "La presencia digital de tu negocio, bien construida.",
     origen: "Alarife: el maestro que levanta la obra.",
-    derechos: "ALARYFES. Desde Ceuta, con oficio.",
+    derechos: "ALARYFES. Desde Granada, con oficio.",
   },
   faq: {
     titulo: "Lo que conviene saber.",
@@ -178,7 +169,7 @@ export const sitio = {
     intro:
       "Alarife es el maestro constructor andalusí: el que levanta la obra. De ahí viene ALARYFES.",
     texto:
-      "Somos una agencia nueva, con base en Ceuta y enfocada en los negocios de Andalucía. Construimos su presencia digital por etapas: una base que funciona y el trabajo mensual que realmente necesitan.",
+      "Somos una agencia con base operativa en Granada y un equipo con raíces en Granada y Córdoba. Trabajamos con empresas de cualquier lugar y construimos su presencia digital por etapas: una base que funciona y el trabajo mensual que realmente necesitan.",
     valores: [
       {
         titulo: "Lo que se ve, se entiende.",

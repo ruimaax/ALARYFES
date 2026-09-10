@@ -130,7 +130,7 @@ export default function Home() {
             addressLocality: sitio.localidad,
             addressCountry: "ES",
           },
-          areaServed: ["Ceuta", "Andalucía"],
+          areaServed: "España",
         }}
       />
     </>
