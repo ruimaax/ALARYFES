@@ -9,7 +9,9 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "build:pages": "node scripts/build-pages.mjs",
-    "build:cloudflare": "npm run build:pages",
+    "build:cloudflare": "opennextjs-cloudflare build",
+    "deploy:cloudflare": "opennextjs-cloudflare deploy",
+    "preview:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "preview:pages": "wrangler pages dev out --d1 DB"
   },
   "dependencies": {
