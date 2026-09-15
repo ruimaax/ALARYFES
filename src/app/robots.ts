@@ -1,9 +1,12 @@
 import type { MetadataRoute } from "next";
-import { sitio } from "@/data/sitio";
+import { seo, sitio } from "@/data/sitio";
 export const dynamic = "force-static";
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: "/api/" },
+    // «Permitir que Google indexe la web» se cambia en /admin → Ajustes.
+    rules: seo.indexar
+      ? { userAgent: "*", allow: "/", disallow: ["/api/", "/admin"] }
+      : { userAgent: "*", disallow: "/" },
     sitemap: `${sitio.url}/sitemap.xml`,
   };
 }

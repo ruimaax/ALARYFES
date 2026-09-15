@@ -1689,6 +1689,111 @@ img {
   padding-top: 50px;
   border-top: 1px solid var(--color-borde);
 }
+/* Contenido gestionado desde /admin: artículos, casos y mantenimiento. */
+.article-cover,
+.blog-card img,
+.case-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--color-borde);
+}
+.article-cover {
+  margin-top: 35px;
+}
+.blog-card img {
+  margin-bottom: 20px;
+}
+.prose-content h3 {
+  font-size: 1.5rem;
+  margin: 30px 0 14px;
+}
+.prose-content ol {
+  list-style: decimal;
+  padding-left: 22px;
+}
+.prose-content li + li {
+  margin-top: 8px;
+}
+.prose-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 30px 0;
+}
+.prose-content blockquote {
+  margin: 30px 0;
+  padding: 6px 0 6px 24px;
+  border-left: 3px solid var(--color-acento);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+.prose-content code {
+  font-size: 0.9em;
+  background: var(--color-superficie);
+  padding: 2px 5px;
+}
+.prose-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 30px 0;
+  font-size: 1rem;
+}
+.prose-content th,
+.prose-content td {
+  border-bottom: 1px solid var(--color-borde);
+  padding: 10px 8px;
+  text-align: left;
+}
+.case-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px 70px;
+}
+.case-card {
+  border-top: 1px solid var(--color-borde);
+  padding-top: 25px;
+}
+.case-card img {
+  margin-bottom: 25px;
+}
+.case-card h2 {
+  font-size: 2.2rem;
+  margin: 10px 0 6px;
+}
+.case-client {
+  color: var(--color-tinta-suave);
+  margin-bottom: 18px;
+}
+.case-card blockquote {
+  margin: 25px 0;
+  padding-left: 22px;
+  border-left: 3px solid var(--color-acento);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+.case-card blockquote footer {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-tinta-suave);
+  margin-top: 8px;
+}
+.maintenance {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 0;
+}
+.maintenance h1 {
+  margin-top: 30px;
+}
+@media (max-width: 760px) {
+  .case-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
 @media (max-width: 900px) {
   .comparison-table th,
   .comparison-table td {

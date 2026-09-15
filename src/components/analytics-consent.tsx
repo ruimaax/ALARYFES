@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Script from "next/script";
 import { cookiesTextos } from "@/data/legal";
+import { analitica } from "@/data/sitio";
 import { StarBorder } from "./star-border";
-const ga = process.env.NEXT_PUBLIC_GA_ID || "";
-const pixel = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
+// Los IDs se configuran en /admin → Ajustes; las variables de entorno quedan
+// como alternativa si el campo está vacío.
+const ga = analitica.googleAnalytics || process.env.NEXT_PUBLIC_GA_ID || "";
+const pixel = analitica.metaPixel || process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
 const enabled = /^G-[A-Z0-9]+$/.test(ga) || /^\d+$/.test(pixel);
 export function AnalyticsConsent({ settings = false }: { settings?: boolean }) {
   const [choice, setChoice] = useState<string | null | undefined>(undefined);

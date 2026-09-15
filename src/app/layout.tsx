@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 import { Faustina, Source_Sans_3 } from "next/font/google";
-import { AnalyticsConsent } from "@/components/analytics-consent";
-import { Grainient } from "@/components/grainient";
-import { Motion } from "@/components/motion";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { WhatsApp } from "@/components/whatsapp";
-import { sitio } from "@/data/sitio";
-import "./globals.css";
+// Layout raíz mínimo: la web pública añade su cabecera, pie y estilos en
+// (sitio)/layout.tsx y el panel de gestión los suyos en admin/layout.tsx.
 const serif = Faustina({
   subsets: ["latin"],
   variable: "--font-display",
@@ -20,20 +14,6 @@ const sans = Source_Sans_3({
   display: "swap",
 });
 export const metadata: Metadata = {
-  metadataBase: new URL(sitio.url),
-  title: {
-    default: "ALARYFES — Web, Google y redes para tu negocio",
-    template: "%s | ALARYFES",
-  },
-  description: sitio.descripcion,
-  openGraph: {
-    type: "website",
-    locale: "es_ES",
-    siteName: sitio.nombre,
-    title: "ALARYFES — Tu presencia digital, bien construida",
-    description: sitio.descripcion,
-  },
-  twitter: { card: "summary" },
   icons: { icon: "/logo.svg" },
 };
 export default function RootLayout({
@@ -41,29 +21,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className={`${serif.variable} ${sans.variable}`}>
-      <body>
-        {/* Crema base, ocre de acento y rosa del titular, todos claros: el
-            texto tinta conserva el contraste encima. */}
-        <div className="site-background" aria-hidden="true">
-          <Grainient
-            color1="#fdf9ef"
-            color2="#ead3ae"
-            color3="#ecc9bd"
-            timeSpeed={0.18}
-            contrast={1}
-            grainAmount={0.05}
-          />
-        </div>
-        <a href="#contenido" className="skip-link">
-          Saltar al contenido
-        </a>
-        <Header />
-        <main id="contenido">{children}</main>
-        <Footer />
-        <WhatsApp floating />
-        <AnalyticsConsent />
-        <Motion />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

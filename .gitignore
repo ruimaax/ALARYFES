@@ -8,3 +8,6 @@ out/
 test-results/
 .vercel/
 .apartado-del-export/
+.cms-local/
+.wrangler/
+.dev.vars

@@ -1,0 +1,49 @@
+{
+  "principal": [
+    {
+      "titulo": "Planes",
+      "href": "/planes"
+    },
+    {
+      "titulo": "Servicios",
+      "href": "/servicios"
+    },
+    {
+      "titulo": "Nosotros",
+      "href": "/sobre-nosotros"
+    }
+  ],
+  "adicionales": [
+    {
+      "titulo": "Casos",
+      "href": "/casos"
+    },
+    {
+      "titulo": "Recomienda",
+      "href": "/recomienda"
+    },
+    {
+      "titulo": "Blog",
+      "href": "/blog"
+    }
+  ],
+  "legales": [
+    {
+      "titulo": "Aviso legal",
+      "href": "/aviso-legal"
+    },
+    {
+      "titulo": "Privacidad",
+      "href": "/politica-privacidad"
+    },
+    {
+      "titulo": "Cookies",
+      "href": "/politica-cookies"
+    }
+  ],
+  "footer": {
+    "frase": "La presencia digital de tu negocio, bien construida.",
+    "origen": "Alarife: el maestro que levanta la obra.",
+    "derechos": "ALARYFES. Desde Granada, con oficio."
+  }
+}

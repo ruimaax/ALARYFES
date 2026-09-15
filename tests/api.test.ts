@@ -39,6 +39,17 @@ test("rejects cross-origin requests and malformed payloads", async () => {
     (await POST(req(valid, { "Content-Type": "text/plain" }))).status,
     415,
   );
+  const hostDeNext = new Request("http://0.0.0.0:3000/api/contacto", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      origin: "http://localhost:3000",
+      host: "localhost:3000",
+      "x-forwarded-for": `test-${ip++}`,
+    },
+    body: JSON.stringify({ ...valid, website: "bot" }),
+  });
+  assert.notEqual((await POST(hostDeNext)).status, 403);
 });
 test("returns an honest preparation status without webhook, and hides honeypot", async () => {
   const original = process.env.CONTACT_WEBHOOK_URL;

@@ -1,0 +1,64 @@
+{
+  "acciones": {
+    "whatsapp": "Escribir por WhatsApp",
+    "planes": "Ver los planes",
+    "comparar": "Comparar los cuatro planes",
+    "contacto": "Hablemos",
+    "formulario": "Ir al formulario",
+    "enviar": "Enviar mi consulta",
+    "recomendar": "Registrar recomendación",
+    "llamar": "Llamar",
+    "detalle": "Ver qué incluye",
+    "menu": "Abrir menú",
+    "cerrar": "Cerrar menú"
+  },
+  "interfaz": {
+    "inicio": "Inicio",
+    "planes": "Planes",
+    "servicios": "Servicios",
+    "contacto": "Contacto",
+    "recomienda": "Recomienda",
+    "nosotros": "Sobre nosotros",
+    "casos": "Casos",
+    "blog": "Blog",
+    "saltar": "Saltar al contenido",
+    "navegacion": "Navegación principal",
+    "navegacionMovil": "Navegación móvil",
+    "ruta": "Ruta de navegación",
+    "mas": "Más sobre ALARYFES",
+    "informacionLegal": "Información legal",
+    "plan": "Plan",
+    "plazo": "Plazo de entrega",
+    "heredado": "Ver también lo que hereda de los planes anteriores",
+    "sustituye": "Las cantidades y prestaciones del plan actual sustituyen a las anteriores cuando amplían el mismo servicio.",
+    "condiciones": "Consultar todas las condiciones y los cambios de plan",
+    "servicio": "Planes de presencia digital ALARYFES",
+    "oferta": "Cuota mensual sin IVA; alta inicial aparte.",
+    "logoAlt": "Emblema de ALARYFES: arco andalusí rojo con columnas ocres"
+  },
+  "tablas": {
+    "concepto": "Concepto",
+    "precio": "Precio",
+    "consultar": "A consultar",
+    "cambio": "Cambio de plan",
+    "alta": "Alta adicional",
+    "compromiso": "Con compromiso de 12 meses",
+    "disciplina": "Qué hacemos",
+    "referidoPlan": "Plan contratado",
+    "tu": "Tú ganas",
+    "otro": "Quien recomiendas gana",
+    "referidos": "Referidos",
+    "recompensa": "Qué ganas"
+  },
+  "blog": {
+    "titulo": "Ideas claras para tu negocio.",
+    "texto": "Web, Google y redes sociales explicados sin jerga.",
+    "vacio": "Estamos preparando las primeras guías. Pronto las encontrarás aquí.",
+    "volver": "Volver al blog"
+  },
+  "notFound": {
+    "titulo": "Por aquí todavía no hemos construido.",
+    "texto": "La página que buscas no existe. Puedes volver al inicio o consultar nuestros planes.",
+    "cta": "Volver al inicio"
+  }
+}

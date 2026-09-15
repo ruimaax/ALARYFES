@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "contexto": "Desde Granada, para empresas de toda España.",
+    "titulo": "Tu negocio tiene mucho que ofrecer.",
+    "remate": "Que lo encuentren.",
+    "pie": "Web · Google · Redes sociales",
+    "sello": "Construimos tu presencia digital.",
+    "precio": "Planes desde",
+    "unidad": "/mes",
+    "alta": "+ alta inicial",
+    "impuesto": "IVA no incluido."
+  },
+  "problema": {
+    "titulo": "Tu próximo cliente ya te está buscando.",
+    "texto": "Pero encuentra una web antigua. Un Instagram que lleva meses parado. Una ficha de Google sin fotos ni horarios. Tu trabajo merece verse tan bien como lo haces.",
+    "cierre": "Nos ocupamos de esa parte. Tú, de tu negocio."
+  },
+  "proceso": {
+    "titulo": "De la primera llamada a estar en marcha.",
+    "texto": "Sin reuniones eternas. Sin palabras que no se entienden.",
+    "pasos": [
+      {
+        "titulo": "Hablamos",
+        "texto": "Nos cuentas qué haces, dónde estás y qué necesitas."
+      },
+      {
+        "titulo": "Te proponemos",
+        "texto": "Un alcance claro, un precio cerrado y los siguientes pasos."
+      },
+      {
+        "titulo": "Construimos",
+        "texto": "Preparamos tu web y tu contenido. Tú lo revisas antes de publicar."
+      },
+      {
+        "titulo": "Seguimos contigo",
+        "texto": "Publicamos, medimos y nos ocupamos del trabajo de cada mes."
+      }
+    ]
+  },
+  "lanzamiento": {
+    "titulo": "Empieza con el alta de lanzamiento.",
+    "texto": "Hasta el 31 de diciembre de 2026. El 1 de enero suben las altas; la cuota mensual de cada plan se mantiene.",
+    "fin": "Hasta el 31.12.2026",
+    "cta": "Consultar precios de lanzamiento"
+  }
+}

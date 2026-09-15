@@ -1,4 +1,5 @@
-import { planes } from "@/data/planes";
+// Ruta relativa: las funciones de Cloudflare también importan este módulo.
+import { planes } from "../data/planes";
 export type ContactPayload = {
   tipo: "contacto" | "recomendacion";
   nombre: string;

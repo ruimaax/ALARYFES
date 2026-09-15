@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { sitio } from "@/data/sitio";
+import { seo, sitio } from "@/data/sitio";
 export function meta(
   title: string,
   description: string,
   path: string,
+  image?: string,
 ): Metadata {
+  // La imagen social por defecto se sube en /admin → Ajustes → SEO.
+  const imagen = image || seo.imagenSocial;
   return {
     title: { absolute: `${title} | ${sitio.nombre}` },
     description,
@@ -17,8 +20,14 @@ export function meta(
       type: "website",
       locale: "es_ES",
       siteName: sitio.nombre,
+      ...(imagen ? { images: [{ url: imagen }] } : {}),
     },
-    twitter: { card: "summary", title, description },
+    twitter: {
+      card: imagen ? "summary_large_image" : "summary",
+      title,
+      description,
+      ...(imagen ? { images: [imagen] } : {}),
+    },
   };
 }
 export function JsonLd({ data }: { data: Record<string, unknown> }) {

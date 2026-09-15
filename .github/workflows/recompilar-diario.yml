@@ -1,0 +1,28 @@
+name: Recompilar la web cada día
+
+on:
+  schedule:
+    # Dos horas UTC cubren el cambio de horario; el paso solo continúa a las 00 h de Madrid.
+    - cron: "10 22,23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recompilar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Llamar al Deploy Hook de Cloudflare
+        env:
+          DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+          EVENTO: ${{ github.event_name }}
+        run: |
+          if [ "$EVENTO" = "schedule" ] && [ "$(TZ=Europe/Madrid date +%H)" != "00" ]; then
+            exit 0
+          fi
+          if [ -z "$DEPLOY_HOOK" ]; then
+            echo "No está configurado el secreto CLOUDFLARE_DEPLOY_HOOK; no se recompila."
+            exit 0
+          fi
+          curl --fail --silent --show-error --request POST "$DEPLOY_HOOK"

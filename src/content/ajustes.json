@@ -1,0 +1,31 @@
+{
+  "empresa": {
+    "nombre": "ALARYFES",
+    "descripcion": "Te montamos la web, te llevamos las redes y nos ocupamos de que aparezcas en Google cuando tus clientes busquen lo que ofreces.",
+    "url": "https://alaryfes.com",
+    "telefonoVisible": "+34 623 173 625",
+    "whatsapp": "34623173625",
+    "email": "hola@alaryfes.com",
+    "localidad": "Granada",
+    "area": "España",
+    "titular": "Adrian Ruiz Matas",
+    "nif": "77449154N",
+    "direccion": "Granada, España"
+  },
+  "seo": {
+    "tituloPorDefecto": "ALARYFES — Web, Google y redes para tu negocio",
+    "tituloSocial": "ALARYFES — Tu presencia digital, bien construida",
+    "imagenSocial": "",
+    "indexar": true,
+    "verificacionGoogle": ""
+  },
+  "analitica": {
+    "googleAnalytics": "",
+    "metaPixel": ""
+  },
+  "mantenimiento": {
+    "activo": false,
+    "titulo": "Estamos de obras.",
+    "texto": "Estamos mejorando la web. Vuelve en unas horas o escríbenos por WhatsApp y te atendemos igualmente."
+  }
+}
