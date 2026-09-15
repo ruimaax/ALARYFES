@@ -1,18 +1,13 @@
 import { recibirContacto } from "@/server/contacto";
 import { configAviso } from "@/server/aviso";
-import type { Secretos } from "@/server/tipos";
+import { entornoNext } from "@/server/entorno-next";
 export const runtime = "nodejs";
 export async function POST(request: Request) {
-  // En `npm run dev` las solicitudes se guardan en la base local del panel
-  // (.cms-local/) para poder probar /admin → Solicitudes.
-  const db =
-    process.env.NODE_ENV === "development"
-      ? (await (await import("@/server/local")).entornoLocal()).db
-      : null;
+  const entorno = await entornoNext();
   return recibirContacto(request, {
-    db,
-    webhook: process.env.CONTACT_WEBHOOK_URL,
-    webhookToken: process.env.CONTACT_WEBHOOK_TOKEN,
-    aviso: configAviso(process.env as Secretos),
+    db: entorno.db,
+    webhook: entorno.secretos.CONTACT_WEBHOOK_URL,
+    webhookToken: entorno.secretos.CONTACT_WEBHOOK_TOKEN,
+    aviso: configAviso(entorno.secretos),
   });
 }

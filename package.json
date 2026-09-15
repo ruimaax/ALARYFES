@@ -13,6 +13,7 @@
     "preview:pages": "wrangler pages dev out --d1 DB"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.20.6",
     "marked": "^18.0.12",
     "next": "16.3.4",
     "next-mdx-remote": "^6.0.0",
@@ -33,7 +34,7 @@
     "tailwindcss": "4.3.3",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "wrangler": "^4.130.0"
+    "wrangler": "^4.132.0"
   },
   "engines": {
     "node": ">=22.0.0"
