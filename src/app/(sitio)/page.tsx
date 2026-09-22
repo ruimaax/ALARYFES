@@ -8,11 +8,10 @@ import { PlanShowcase } from "@/components/plan-showcase";
 import { ContactForm } from "@/components/contact-form";
 import { JsonLd, meta } from "@/lib/seo";
 import { Pattern } from "@/components/architecture";
-export const metadata = meta(
-  "Web, Google y redes para tu negocio",
-  sitio.descripcion,
-  "/",
-);
+export const metadata = {
+  ...meta("Presencia digital", sitio.descripcion, "/"),
+  title: { absolute: "ALARYFES | Presencia digital" },
+};
 export default function Home() {
   const now = new Date();
   return (
@@ -100,11 +99,14 @@ export default function Home() {
         </div>
       </section>
       <LaunchNotice initialDate={now.toISOString()} />
-      <section className="section contact-section">
-        <div className="container split">
-          <h2>{sitio.contacto.titulo}</h2>
-          <div>
-            <p className="lead">{sitio.contacto.texto}</p>
+      <section className="section contact-section contact-home">
+        <div className="container contact-home-layout">
+          <div className="contact-home-copy">
+            <p className="contact-home-kicker">
+              Primera consulta · sin compromiso
+            </p>
+            <h2>{sitio.contacto.titulo}</h2>
+            <p className="contact-home-lead">{sitio.contacto.texto}</p>
             <div className="hero-actions">
               <WhatsApp />
               <Link className="text-link" href="/contacto">
@@ -112,14 +114,10 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
-        <div className="container home-contact-form">
-          <div className="split">
-            <div>
-              <p className="intro-copy">{sitio.contacto.local}</p>
-              <a className="text-link" href={`mailto:${sitio.email}`}>
-                {sitio.email}
-              </a>
+          <div className="contact-form-panel">
+            <div className="contact-form-panel-heading">
+              <span>Tu proyecto</span>
+              <span aria-hidden="true">✦</span>
             </div>
             <ContactForm />
           </div>

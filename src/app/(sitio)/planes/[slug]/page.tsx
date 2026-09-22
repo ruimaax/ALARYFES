@@ -6,7 +6,7 @@ import { sitio } from "@/data/sitio";
 import { politicaCambios } from "@/data/cambios";
 import { Architecture } from "@/components/architecture";
 import { WhatsApp } from "@/components/whatsapp";
-import { Faq, ContactCta } from "@/components/content";
+import { ContactCta } from "@/components/content";
 import { Breadcrumbs, JsonLd, meta } from "@/lib/seo";
 export function generateStaticParams() {
   return planes.map((p) => ({ slug: p.slug }));
@@ -131,15 +131,13 @@ export default async function PlanPage({
           <h2>{sitio.planes.condiciones}</h2>
           <div className="policy-pair">
             <p>{politicaCambios.bajar}</p>
-            <p>{politicaCambios.cancelar}</p>
           </div>
           <Link className="text-link" href="/planes#condiciones">
             {interfaz.condiciones}
           </Link>
         </div>
       </section>
-      <Faq />
-      <ContactCta />
+      <ContactCta form />
       <JsonLd
         data={{
           "@type": "Service",

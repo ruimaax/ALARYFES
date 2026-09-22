@@ -2,7 +2,6 @@ import { interfaz } from "@/data/interfaz";
 import {
   PageIntro,
   ResponsiveTable,
-  Faq,
   ContactCta,
 } from "@/components/content";
 import { PlanShowcase } from "@/components/plan-showcase";
@@ -59,8 +58,7 @@ export default function PlanesPage() {
           </ul>
         </div>
       </section>
-      <Faq />
-      <ContactCta />
+      <ContactCta form />
       <JsonLd
         data={{
           "@type": "Service",

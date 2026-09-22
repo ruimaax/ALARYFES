@@ -70,9 +70,7 @@ export function PlanShowcase({
           />
         ))}
       </div>
-      <p className="plans-footnote">
-        {sitio.planes.fiscal} <span>{sitio.planes.garantia}</span>
-      </p>
+      <p className="plans-footnote">{sitio.planes.fiscal}</p>
     </div>
   );
 }
@@ -93,6 +91,7 @@ function PlanColumn({
   return (
     <article
       className="plan-column"
+      data-plan={plan.slug}
       style={{ "--plan-index": index } as React.CSSProperties}
     >
       <SpotlightCard className="plan-card">

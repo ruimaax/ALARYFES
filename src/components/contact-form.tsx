@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { privacidadBasica } from "@/data/legal";
 import { sitio } from "@/data/sitio";
 import { planes } from "@/data/planes";
 import { validateContact } from "@/lib/contact-validation";
@@ -28,6 +27,25 @@ export function ContactForm({
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const formRef = useRef<HTMLFormElement>(null);
+  // Progreso: cuántos campos obligatorios están completos.
+  const [progreso, setProgreso] = useState({ hechos: 0, total: 0 });
+  const [caracteres, setCaracteres] = useState(0);
+  const medir = () => {
+    const form = formRef.current;
+    if (!form) return;
+    const campos = Array.from(
+      form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+        "input[required], textarea[required]",
+      ),
+    );
+    const hechos = campos.filter((c) =>
+      c.type === "checkbox" ? (c as HTMLInputElement).checked : c.value.trim(),
+    ).length;
+    setProgreso({ hechos, total: campos.length });
+    const mensaje = form.elements.namedItem("mensaje");
+    setCaracteres(mensaje instanceof HTMLTextAreaElement ? mensaje.value.length : 0);
+  };
+  useEffect(medir, []);
   const prefix = referral ? "refer" : "contact";
   const field = (
     name: string,
@@ -74,7 +92,8 @@ export function ContactForm({
       setStatus("error");
       setMessage(sitio.contacto.validacion);
       const first = Object.keys(validation.errors)[0];
-      (form.elements.namedItem(first) as HTMLElement | null)?.focus();
+      const campo = form.elements.namedItem(first);
+      if (campo instanceof HTMLElement) campo.focus();
       return;
     }
     setErrors({});
@@ -98,6 +117,7 @@ export function ContactForm({
       if (!pending) {
         track("Contacto", { tipo: values.tipo });
         form.reset();
+        medir();
       }
     } catch (error) {
       setStatus("error");
@@ -111,13 +131,31 @@ export function ContactForm({
   }
   return (
     <form
+      id={`${prefix}-form`}
       className="contact-form"
       ref={formRef}
       onSubmit={submit}
+      onInput={medir}
+      onChange={medir}
       noValidate
       aria-busy={status === "loading"}
     >
       <p className="form-required">{sitio.contacto.requerido}</p>
+      <div
+        className="form-progress"
+        style={
+          {
+            "--progress": progreso.total ? progreso.hechos / progreso.total : 0,
+          } as React.CSSProperties
+        }
+        data-complete={progreso.total > 0 && progreso.hechos === progreso.total}
+        aria-hidden="true"
+      >
+        <i />
+        <span>
+          {progreso.hechos}/{progreso.total}
+        </span>
+      </div>
       <div className="form-grid">
         {field("nombre", sitio.contacto.nombre, "text", 100)}
         {field("negocio", sitio.contacto.negocio)}
@@ -130,22 +168,25 @@ export function ContactForm({
           <>
             {field("telefono", sitio.contacto.telefono, "tel", 25)}
             {field("sector", sitio.contacto.sector)}
-            <div className="field full">
-              <label htmlFor={`${prefix}-plan`}>{sitio.contacto.plan}</label>
-              <select
-                name="plan"
-                id={`${prefix}-plan`}
-                value={plan}
-                onChange={(e) => setPlan(e.target.value)}
-              >
-                <option value="">{sitio.contacto.sinPlan}</option>
-                {planes.map((p) => (
-                  <option key={p.slug} value={p.slug}>
-                    {p.nombre}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <fieldset className="field full plan-chips">
+              <legend>{sitio.contacto.plan}</legend>
+              <div>
+                {[{ slug: "", nombre: sitio.contacto.sinPlan }, ...planes].map(
+                  (p) => (
+                    <label key={p.slug || "ninguno"}>
+                      <input
+                        type="radio"
+                        name="plan"
+                        value={p.slug}
+                        checked={plan === p.slug}
+                        onChange={() => setPlan(p.slug)}
+                      />
+                      <span>{p.nombre}</span>
+                    </label>
+                  ),
+                )}
+              </div>
+            </fieldset>
             <div className="field full">
               <label htmlFor={`${prefix}-mensaje`}>
                 {sitio.contacto.mensaje} *
@@ -161,6 +202,9 @@ export function ContactForm({
                   errors.mensaje ? `${prefix}-mensaje-error` : undefined
                 }
               />
+              <span className="field-count" aria-hidden="true">
+                {caracteres}/3000
+              </span>
               <FieldError name="mensaje" errors={errors} prefix={prefix} />
             </div>
           </>
@@ -193,15 +237,6 @@ export function ContactForm({
         </span>
       </label>
       <FieldError name="consentimiento" errors={errors} prefix={prefix} />
-      <div className="privacy-basic">
-        <p>
-          {privacidadBasica.responsable} {privacidadBasica.finalidad}
-        </p>
-        <p>
-          {privacidadBasica.destinatarios} {privacidadBasica.derechos}{" "}
-          <Link href="/politica-privacidad">{privacidadBasica.enlace}</Link>.
-        </p>
-      </div>
       <StarBorder
         className="button button-gold"
         type="submit"
@@ -214,6 +249,12 @@ export function ContactForm({
             : sitio.acciones.enviar}
       </StarBorder>
       <div className={`form-status ${status}`} role="status" aria-live="polite">
+        {status === "success" && (
+          <svg className="form-check" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10.5" pathLength={100} />
+            <path d="m7 12.5 3.2 3.2L17 9" pathLength={100} />
+          </svg>
+        )}
         {message}
       </div>
     </form>

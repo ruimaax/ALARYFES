@@ -17,11 +17,11 @@ export function Header() {
         >
           <span className="brand-logo">
             <Image
-              src="/logo-marca.png"
+              src="/logo-transparente.png"
               alt="Emblema de ALARYFES: arco andalusí rojo con columnas ocres"
-              width={86}
-              height={86}
-              priority
+              width={500}
+              height={500}
+              preload
             />
           </span>
           <span>{sitio.nombre}</span>

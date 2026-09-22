@@ -8,7 +8,7 @@
     "precio": "Planes desde",
     "unidad": "/mes",
     "alta": "+ alta inicial",
-    "impuesto": "IVA no incluido."
+    "impuesto": "IVA incluido."
   },
   "problema": {
     "titulo": "Tu próximo cliente ya te está buscando.",

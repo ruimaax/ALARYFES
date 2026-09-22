@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { faq } from "@/data/faq";
 import { sitio } from "@/data/sitio";
 import { Breadcrumbs, JsonLd } from "@/lib/seo";
 import { WhatsApp } from "./whatsapp";
+import { StarBorder } from "./star-border";
 export function PageIntro({
   title,
   description,
@@ -62,7 +64,7 @@ export function Faq() {
     </section>
   );
 }
-export function ContactCta() {
+export function ContactCta({ form = false }: { form?: boolean }) {
   return (
     <section className="section contact-section">
       <div className="container split">
@@ -70,7 +72,17 @@ export function ContactCta() {
         <div>
           <p className="lead">{sitio.contacto.texto}</p>
           <div className="hero-actions">
-            <WhatsApp />
+            {form ? (
+              <StarBorder
+                as={Link}
+                className="button button-gold"
+                href="/contacto#contact-form"
+              >
+                {sitio.acciones.formulario}
+              </StarBorder>
+            ) : (
+              <WhatsApp />
+            )}
           </div>
         </div>
       </div>

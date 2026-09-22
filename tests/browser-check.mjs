@@ -178,8 +178,8 @@ try {
   await page.unroute("**/api/contacto");
   await page.goto(base + "/contacto?plan=medina");
   await page
-    .locator("#contact-plan")
-    .evaluate((e) => e.value === "medina" || Promise.reject(e.value));
+    .locator('#contact-form input[name="plan"][value="medina"]')
+    .evaluate((e) => e.checked || Promise.reject("medina sin marcar"));
   result.interactions.push("Plan preseleccionado desde la URL");
   await page.goto(base + "/recomienda");
   await page.getByLabel("Tu nombre *", { exact: true }).fill("Prueba local");

@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { servicios, tablaTextos } from "@/data/servicios";
-import { extras } from "@/data/extras";
-import { sitio } from "@/data/sitio";
-import { PageIntro, ResponsiveTable, ContactCta } from "@/components/content";
+import { servicios } from "@/data/servicios";
+import { PageIntro } from "@/components/content";
 import { meta } from "@/lib/seo";
 export const metadata = meta("Servicios", servicios.descripcion, "/servicios");
 export default function ServiciosPage() {
@@ -31,18 +29,6 @@ export default function ServiciosPage() {
           ))}
         </div>
       </section>
-      <section className="section surface-section">
-        <div className="container">
-          <h2>{sitio.planes.extras}</h2>
-          <ResponsiveTable
-            caption={sitio.planes.extras}
-            headers={[tablaTextos.concepto, tablaTextos.precio]}
-            rows={extras.map((e) => [e.concepto, tablaTextos.consultar])}
-          />
-          <p className="table-note">{sitio.planes.extrasNota}</p>
-        </div>
-      </section>
-      <ContactCta />
     </>
   );
 }

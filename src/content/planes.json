@@ -15,7 +15,7 @@
     "herencia": "Todo lo de",
     "mas": ", más:",
     "detalle": "Conoce el plan",
-    "fiscal": "Todos los precios se muestran sin IVA.",
+    "fiscal": "Todos los precios incluyen IVA.",
     "garantia": "Tu cuota no sube durante los primeros 24 meses.",
     "comparativa": "Compara el trabajo, no solo el precio.",
     "extras": "Si necesitas algo más.",
@@ -66,13 +66,13 @@
       "descriptor": "Web + Google + redes sociales",
       "bajada": "Ya se te ve desde la calle.",
       "lanzamiento": {
-        "alta3": 699,
-        "alta12": 499,
+        "alta3": 690,
+        "alta12": 490,
         "mensual": 199
       },
       "normal": {
         "alta3": 999,
-        "alta12": 699,
+        "alta12": 690,
         "mensual": 199
       },
       "incluye": [
